@@ -11,6 +11,18 @@ import MapKit
 
 class SearchViewController: UIViewController {
 
+    @IBOutlet weak var medicalButton: UIButton!
+    @IBOutlet weak var wellnessButton: UIButton!
+    @IBOutlet weak var beautyButton: UIButton!
+    @IBOutlet weak var therapyButton: UIButton!
+    @IBOutlet weak var shoppingButton: UIButton!
+    @IBOutlet weak var professionalButton: UIButton!
+    
+    enum ButtonType: Int {
+        case medical = 0, wellness, beauty, therapy, shopping, professional
+    }
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -21,6 +33,9 @@ class SearchViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func goToCategory(_ sender: UIButton) {
+        print(ButtonType(rawValue: sender.tag)!)
+    }
 
 }
 

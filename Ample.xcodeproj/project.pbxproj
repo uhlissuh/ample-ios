@@ -14,6 +14,7 @@
 		69D99D501EF081EE00A3BE0E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 69D99D4F1EF081EE00A3BE0E /* Assets.xcassets */; };
 		69D99D531EF081EE00A3BE0E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69D99D511EF081EE00A3BE0E /* LaunchScreen.storyboard */; };
 		69D99D5E1EF081EE00A3BE0E /* AmpleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D99D5D1EF081EE00A3BE0E /* AmpleTests.swift */; };
+		69D99D6B1EF3079400A3BE0E /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D99D6A1EF3079400A3BE0E /* CategoryViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,7 @@
 		69D99D591EF081EE00A3BE0E /* AmpleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AmpleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		69D99D5D1EF081EE00A3BE0E /* AmpleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmpleTests.swift; sourceTree = "<group>"; };
 		69D99D5F1EF081EF00A3BE0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		69D99D6A1EF3079400A3BE0E /* CategoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 				69D99D461EF081EE00A3BE0E /* AppDelegate.swift */,
 				69D99D481EF081EE00A3BE0E /* SearchViewController.swift */,
 				69D99D4A1EF081EE00A3BE0E /* SecondViewController.swift */,
+				69D99D6A1EF3079400A3BE0E /* CategoryViewController.swift */,
 				69D99D4C1EF081EE00A3BE0E /* Main.storyboard */,
 				69D99D4F1EF081EE00A3BE0E /* Assets.xcassets */,
 				69D99D511EF081EE00A3BE0E /* LaunchScreen.storyboard */,
@@ -202,6 +205,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69D99D6B1EF3079400A3BE0E /* CategoryViewController.swift in Sources */,
 				69D99D4B1EF081EE00A3BE0E /* SecondViewController.swift in Sources */,
 				69D99D471EF081EE00A3BE0E /* AppDelegate.swift in Sources */,
 				69D99D491EF081EE00A3BE0E /* SearchViewController.swift in Sources */,

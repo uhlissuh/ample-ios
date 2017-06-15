@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--First-->
+        <!--Search-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
-                <viewController id="9pv-A4-QxB" customClass="FirstViewController" customModule="Ample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="9pv-A4-QxB" userLabel="Search" customClass="SearchViewController" customModule="Ample" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ia1-K6-d13"/>
                         <viewControllerLayoutGuide type="bottom" id="4ug-Mw-9AY"/>
@@ -22,98 +22,178 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="GPV-gQ-E8p" userLabel="Main Container Stack View">
-                                <rect key="frame" x="16" y="120" width="343" height="398"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="GPV-gQ-E8p" userLabel="Main Container Stack View">
+                                <rect key="frame" x="16" y="144" width="343" height="404"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="qB9-LT-Rfz" userLabel="Search Stack View">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="100.5"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="qB9-LT-Rfz" userLabel="Search Stack View">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="149"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find Body Positive Services Near You:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7O8-8x-hs2" userLabel="search label">
-                                                <rect key="frame" x="0.0" y="0.0" width="343" height="20.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="343" height="35"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="35" id="Fg2-O3-vep"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="KohinoorTelugu-Light" family="Kohinoor Telugu" pointSize="17"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="find a service" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WOJ-nU-7fs">
-                                                <rect key="frame" x="0.0" y="30.5" width="343" height="30"/>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Service" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WOJ-nU-7fs">
+                                                <rect key="frame" x="0.0" y="47" width="343" height="45"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="30" id="jbD-Jo-9yj"/>
+                                                    <constraint firstAttribute="height" constant="45" id="jbD-Jo-9yj"/>
+                                                    <constraint firstAttribute="width" constant="343" id="jbP-YN-NSH"/>
                                                 </constraints>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="l1f-v5-7qU">
-                                                <rect key="frame" x="0.0" y="70.5" width="343" height="30"/>
+                                                <rect key="frame" x="0.0" y="104" width="343" height="45"/>
                                                 <subviews>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BLG-vK-qgi">
-                                                        <rect key="frame" x="0.0" y="0.0" width="292" height="30"/>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BLG-vK-qgi">
+                                                        <rect key="frame" x="0.0" y="0.0" width="288" height="45"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="30" id="puE-Tf-KH8"/>
+                                                            <constraint firstAttribute="width" constant="288" id="Qqz-fo-86k"/>
+                                                            <constraint firstAttribute="height" constant="45" id="puE-Tf-KH8"/>
                                                         </constraints>
-                                                        <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
-                                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BeJ-El-1QB">
-                                                        <rect key="frame" x="297" y="0.0" width="46" height="30"/>
-                                                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BeJ-El-1QB">
+                                                        <rect key="frame" x="293" y="0.0" width="50" height="45"/>
+                                                        <color key="backgroundColor" red="0.99835759401321411" green="0.77660554461622333" blue="0.38435774201263351" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="50" id="mFt-cM-zts"/>
+                                                        </constraints>
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <state key="normal" title="Button">
+                                                        <state key="normal" title="Go">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="5"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
                                                     </button>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="B2G-UE-PWa">
-                                        <rect key="frame" x="0.0" y="317.5" width="343" height="80.5"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="B2G-UE-PWa" userLabel="Categories Stack View">
+                                        <rect key="frame" x="0.0" y="169" width="343" height="235"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Browse Categories:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S07-T1-fCV" userLabel="Browse Categories:">
-                                                <rect key="frame" x="0.0" y="0.0" width="343" height="20.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="343" height="35"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="35" id="V1B-vm-fcs"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="KohinoorTelugu-Light" family="Kohinoor Telugu" pointSize="17"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="izd-sK-vrD" userLabel="First Button Stack View">
-                                                <rect key="frame" x="0.0" y="20.5" width="343" height="30"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="qoC-n3-7EI" userLabel="Button Stack View">
+                                                <rect key="frame" x="0.0" y="45" width="343" height="190"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dyN-X2-Rne">
-                                                        <rect key="frame" x="0.0" y="0.0" width="94.5" height="30"/>
-                                                        <color key="backgroundColor" red="0.70301042420000004" green="0.84334646420000003" blue="0.88373282070000003" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <state key="normal" title="Button"/>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NCY-2F-chk">
-                                                        <rect key="frame" x="124.5" y="0.0" width="94" height="30"/>
-                                                        <color key="backgroundColor" red="0.70301042420000004" green="0.84334646420000003" blue="0.88373282070000003" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <state key="normal" title="Button"/>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WRz-P5-9VI">
-                                                        <rect key="frame" x="248.5" y="0.0" width="94.5" height="30"/>
-                                                        <color key="backgroundColor" red="0.70301042420000004" green="0.84334646420000003" blue="0.88373282070000003" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <state key="normal" title="Button"/>
-                                                    </button>
-                                                </subviews>
-                                            </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="NMf-7R-y7Q" userLabel="Second Button Stack View">
-                                                <rect key="frame" x="0.0" y="50.5" width="343" height="30"/>
-                                                <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PJD-TK-BDe">
-                                                        <rect key="frame" x="0.0" y="0.0" width="94.5" height="30"/>
-                                                        <color key="backgroundColor" red="0.70301042420000004" green="0.84334646420000003" blue="0.88373282070000003" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <state key="normal" title="Button"/>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a27-v0-xhy">
-                                                        <rect key="frame" x="124.5" y="0.0" width="94" height="30"/>
-                                                        <color key="backgroundColor" red="0.70301042420000004" green="0.84334646420000003" blue="0.88373282070000003" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <state key="normal" title="Button"/>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VLp-my-yW4">
-                                                        <rect key="frame" x="248.5" y="0.0" width="94.5" height="30"/>
-                                                        <color key="backgroundColor" red="0.70301042420000004" green="0.84334646420000003" blue="0.88373282070000003" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <state key="normal" title="Button"/>
-                                                    </button>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="izd-sK-vrD" userLabel="First Button Row Stack View">
+                                                        <rect key="frame" x="0.0" y="0.0" width="343" height="85"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dyN-X2-Rne">
+                                                                <rect key="frame" x="0.0" y="0.0" width="94.5" height="85"/>
+                                                                <color key="backgroundColor" red="0.70301042420000004" green="0.84334646420000003" blue="0.88373282070000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <state key="normal" title="Medical">
+                                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                </state>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                        <integer key="value" value="5"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="goToCategory:" destination="9pv-A4-QxB" eventType="touchUpInside" id="YlZ-lK-h3L"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NCY-2F-chk">
+                                                                <rect key="frame" x="124.5" y="0.0" width="94" height="85"/>
+                                                                <color key="backgroundColor" red="0.70301042420000004" green="0.84334646420000003" blue="0.88373282070000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <state key="normal" title="Wellness">
+                                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                </state>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                        <integer key="value" value="5"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="goToCategory:" destination="9pv-A4-QxB" eventType="touchUpInside" id="f2v-xl-kgM"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WRz-P5-9VI">
+                                                                <rect key="frame" x="248.5" y="0.0" width="94.5" height="85"/>
+                                                                <color key="backgroundColor" red="0.70301042420000004" green="0.84334646420000003" blue="0.88373282070000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <state key="normal" title="Beauty">
+                                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                </state>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                        <integer key="value" value="5"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="goToCategory:" destination="9pv-A4-QxB" eventType="touchUpInside" id="1I1-1Y-j3E"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="NMf-7R-y7Q" userLabel="Second Button Row Stack View">
+                                                        <rect key="frame" x="0.0" y="105" width="343" height="85"/>
+                                                        <subviews>
+                                                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PJD-TK-BDe">
+                                                                <rect key="frame" x="0.0" y="0.0" width="94.5" height="85"/>
+                                                                <color key="backgroundColor" red="0.70301042420000004" green="0.84334646420000003" blue="0.88373282070000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <state key="normal" title="Therapy">
+                                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                </state>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                        <integer key="value" value="5"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="goToCategory:" destination="9pv-A4-QxB" eventType="touchUpInside" id="jcC-Kn-oS0"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a27-v0-xhy">
+                                                                <rect key="frame" x="124.5" y="0.0" width="94" height="85"/>
+                                                                <color key="backgroundColor" red="0.70301042420000004" green="0.84334646420000003" blue="0.88373282070000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <state key="normal" title="Shopping">
+                                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                </state>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                        <integer key="value" value="5"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="goToCategory:" destination="9pv-A4-QxB" eventType="touchUpInside" id="STu-QD-6Q2"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VLp-my-yW4">
+                                                                <rect key="frame" x="248.5" y="0.0" width="94.5" height="85"/>
+                                                                <color key="backgroundColor" red="0.70301042420000004" green="0.84334646420000003" blue="0.88373282070000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <state key="normal" title="Professional">
+                                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                </state>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                        <integer key="value" value="5"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="goToCategory:" destination="9pv-A4-QxB" eventType="touchUpInside" id="2uV-1G-Zm5"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
@@ -123,19 +203,46 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="GPV-gQ-E8p" secondAttribute="bottom" constant="100" id="ETk-xy-cFO"/>
+                            <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="GPV-gQ-E8p" secondAttribute="bottom" constant="70" id="ETk-xy-cFO"/>
                             <constraint firstAttribute="trailingMargin" secondItem="GPV-gQ-E8p" secondAttribute="trailing" id="SkL-Ah-r0h"/>
-                            <constraint firstItem="GPV-gQ-E8p" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="100" id="bm8-BL-pVW"/>
+                            <constraint firstItem="GPV-gQ-E8p" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="80" id="bm8-BL-pVW"/>
                             <constraint firstItem="GPV-gQ-E8p" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" id="qqr-gF-uZ3"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="First" image="first" id="acW-dT-cKf"/>
+                    <navigationItem key="navigationItem" id="vhz-Av-RL5"/>
+                    <connections>
+                        <outlet property="beautyButton" destination="WRz-P5-9VI" id="cEh-Ks-EOw"/>
+                        <outlet property="medicalButton" destination="dyN-X2-Rne" id="PA2-5V-OnZ"/>
+                        <outlet property="professionalButton" destination="VLp-my-yW4" id="OQ3-dx-iK1"/>
+                        <outlet property="shoppingButton" destination="a27-v0-xhy" id="Luu-yJ-szM"/>
+                        <outlet property="therapyButton" destination="PJD-TK-BDe" id="DKm-FE-cmU"/>
+                        <outlet property="wellnessButton" destination="NCY-2F-chk" id="g6W-ub-wUQ"/>
+                        <segue destination="RKC-Oe-i6o" kind="show" identifier="showCategory" id="0QA-Lw-tER"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="749.60000000000002" y="-320.68965517241384"/>
+            <point key="canvasLocation" x="1688.8" y="-320.68965517241384"/>
         </scene>
-        <!--Second-->
+        <!--Category-->
+        <scene sceneID="PQf-mD-P72">
+            <objects>
+                <viewController id="RKC-Oe-i6o" userLabel="Category" customClass="CategoryViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zPG-9I-edu"/>
+                        <viewControllerLayoutGuide type="bottom" id="m8n-w2-pzH"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wag-F3-eZ5">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Od6-Dg-dOC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2391.1999999999998" y="-321.58920539730138"/>
+        </scene>
+        <!--Second View Controller-->
         <scene sceneID="wg7-f3-ORb">
             <objects>
                 <viewController id="8rJ-Kc-sve" customClass="SecondViewController" customModule="Ample" customModuleProvider="target" sceneMemberID="viewController">
@@ -169,7 +276,7 @@
                             <constraint firstAttribute="centerY" secondItem="zEq-FU-wV5" secondAttribute="centerY" id="qzY-Ky-pLD"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Second" image="second" id="cPa-gy-q4n"/>
+                    <tabBarItem key="tabBarItem" systemItem="more" id="cPa-gy-q4n"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
@@ -186,7 +293,7 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="9pv-A4-QxB" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
+                        <segue destination="jXE-8v-Xds" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
                         <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
                     </connections>
                 </tabBarController>
@@ -194,9 +301,24 @@
             </objects>
             <point key="canvasLocation" x="0.0" y="0.0"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="fDR-Fy-V3q">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jXE-8v-Xds" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" systemItem="search" id="acW-dT-cKf"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="pps-YR-tKt">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="9pv-A4-QxB" kind="relationship" relationship="rootViewController" id="TW4-ow-4y7"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mbo-3K-fwr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="749.60000000000002" y="-320.68965517241384"/>
+        </scene>
     </scenes>
-    <resources>
-        <image name="first" width="30" height="30"/>
-        <image name="second" width="30" height="30"/>
-    </resources>
 </document>
