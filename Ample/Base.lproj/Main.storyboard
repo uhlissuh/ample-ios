@@ -109,7 +109,7 @@
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                                 <connections>
-                                                                    <action selector="goToCategory:" destination="9pv-A4-QxB" eventType="touchUpInside" id="YlZ-lK-h3L"/>
+                                                                    <segue destination="RKC-Oe-i6o" kind="show" id="Nqk-hX-uHu"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NCY-2F-chk">
@@ -124,7 +124,7 @@
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                                 <connections>
-                                                                    <action selector="goToCategory:" destination="9pv-A4-QxB" eventType="touchUpInside" id="f2v-xl-kgM"/>
+                                                                    <segue destination="RKC-Oe-i6o" kind="show" id="dqo-kY-e6l"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WRz-P5-9VI">
@@ -139,7 +139,7 @@
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                                 <connections>
-                                                                    <action selector="goToCategory:" destination="9pv-A4-QxB" eventType="touchUpInside" id="1I1-1Y-j3E"/>
+                                                                    <segue destination="RKC-Oe-i6o" kind="show" id="kQX-AG-3X4"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -159,7 +159,7 @@
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                                 <connections>
-                                                                    <action selector="goToCategory:" destination="9pv-A4-QxB" eventType="touchUpInside" id="jcC-Kn-oS0"/>
+                                                                    <segue destination="RKC-Oe-i6o" kind="show" id="751-Ua-HpP"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a27-v0-xhy">
@@ -174,7 +174,7 @@
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                                 <connections>
-                                                                    <action selector="goToCategory:" destination="9pv-A4-QxB" eventType="touchUpInside" id="STu-QD-6Q2"/>
+                                                                    <segue destination="RKC-Oe-i6o" kind="show" id="71E-qu-KLw"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VLp-my-yW4">
@@ -189,7 +189,7 @@
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                                 <connections>
-                                                                    <action selector="goToCategory:" destination="9pv-A4-QxB" eventType="touchUpInside" id="2uV-1G-Zm5"/>
+                                                                    <segue destination="RKC-Oe-i6o" kind="show" id="1nT-Lg-6vi"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -217,7 +217,6 @@
                         <outlet property="shoppingButton" destination="a27-v0-xhy" id="Luu-yJ-szM"/>
                         <outlet property="therapyButton" destination="PJD-TK-BDe" id="DKm-FE-cmU"/>
                         <outlet property="wellnessButton" destination="NCY-2F-chk" id="g6W-ub-wUQ"/>
-                        <segue destination="RKC-Oe-i6o" kind="show" identifier="showCategory" id="0QA-Lw-tER"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
@@ -227,7 +226,7 @@
         <!--Category-->
         <scene sceneID="PQf-mD-P72">
             <objects>
-                <viewController id="RKC-Oe-i6o" userLabel="Category" customClass="CategoryViewController" sceneMemberID="viewController">
+                <viewController id="RKC-Oe-i6o" userLabel="Category" customClass="CategoryViewController" customModule="Ample" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="zPG-9I-edu"/>
                         <viewControllerLayoutGuide type="bottom" id="m8n-w2-pzH"/>
@@ -321,4 +320,7 @@
             <point key="canvasLocation" x="749.60000000000002" y="-320.68965517241384"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="kQX-AG-3X4"/>
+    </inferredMetricsTieBreakers>
 </document>

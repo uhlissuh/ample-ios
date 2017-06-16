@@ -32,10 +32,10 @@ class SearchViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    @IBAction func goToCategory(_ sender: UIButton) {
-        print(ButtonType(rawValue: sender.tag)!)
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let categoriesVC = segue.destination as! CategoryViewController
+        categoriesVC.buttonTag = (sender as! UIButton).tag
     }
-
 }
 
