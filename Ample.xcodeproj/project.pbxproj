@@ -414,6 +414,7 @@
 				69D99D641EF081EF00A3BE0E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		69D99D651EF081EF00A3BE0E /* Build configuration list for PBXNativeTarget "AmpleTests" */ = {
 			isa = XCConfigurationList;
@@ -422,6 +423,7 @@
 				69D99D671EF081EF00A3BE0E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

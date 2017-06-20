@@ -10,13 +10,16 @@ import UIKit
 
 class CategoryViewController: UIViewController {
     
+    
     var buttonTag: Int = 0
+    
+    enum ButtonType: Int {
+        case medical = 0, wellness, beauty, therapy, shopping, professional
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if buttonTag == 0 {
-            print("medical button was pushed")
-        }
+//        ButtonType(rawValue: sender.tag)!
     }
 
     override func didReceiveMemoryWarning() {
