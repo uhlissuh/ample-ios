@@ -1,0 +1,6 @@
+framework module Pods_Ample {
+  umbrella header "Pods-Ample-umbrella.h"
+
+  export *
+  module * { export * }
+}
