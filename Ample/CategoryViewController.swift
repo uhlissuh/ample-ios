@@ -13,8 +13,12 @@ struct Servicer {
     var specialty: String
 }
 
-class CategoryViewController: UIViewController {
+class CategoryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var buttonTag: Int = 0
+    var servicers: [Servicer] = []
+    let cellReuseIdentifier = "MyCellReuseIdentifier"
+    @IBOutlet weak var providersTable: UITableView!
+
     
     enum ButtonType: Int {
         case medical = 0, wellness, beauty, therapy, shopping, professional
@@ -22,9 +26,16 @@ class CategoryViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        providersTable.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
+        providersTable.dataSource = self
+        providersTable.delegate = self
         getServicersForCategory(buttonTag: buttonTag) {(servicers) -> Void in
-            print(servicers)
+            self.servicers = servicers
+            print("got servicers")
+            self.providersTable.reloadData()
         }
+
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -44,7 +55,9 @@ class CategoryViewController: UIViewController {
                             specialty: servicerJSON["specialty"] as! String
                         )
                     })
-                    completionHandler(servicers)
+                    DispatchQueue.main.async {
+                        completionHandler(servicers)
+                    }
                 }
             } catch let parseError as NSError {
                 print("JSON Error \(parseError.localizedDescription)")
@@ -52,5 +65,24 @@ class CategoryViewController: UIViewController {
         }
         task.resume()
     }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell =  tableView.dequeueReusableCell(withIdentifier: self.cellReuseIdentifier)!
+            
+        let servicer = self.servicers[(indexPath as NSIndexPath).row]
+
+        
+        cell.textLabel?.text = servicer.name
+        cell.detailTextLabel?.text = servicer.specialty
+        
+        return cell
+
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+       return self.servicers.count
+    }
+    
+    
     
 }
