@@ -8,16 +8,12 @@
 
 import UIKit
 
-struct Servicer {
-    var name: String
-    var specialty: String
-}
-
 class CategoryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var buttonTag: Int = 0
     var servicers: [Servicer] = []
     let cellReuseIdentifier = "MyCellReuseIdentifier"
     @IBOutlet weak var providersTable: UITableView!
+    var selectedRow: Int = 0
 
     
     enum ButtonType: Int {
@@ -26,12 +22,10 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        providersTable.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
         providersTable.dataSource = self
         providersTable.delegate = self
         getServicersForCategory(buttonTag: buttonTag) {(servicers) -> Void in
             self.servicers = servicers
-            print("got servicers")
             self.providersTable.reloadData()
         }
 
@@ -67,15 +61,18 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell =  tableView.dequeueReusableCell(withIdentifier: self.cellReuseIdentifier)!
-            
+        var cell = tableView.dequeueReusableCell(withIdentifier: self.cellReuseIdentifier)
+        if cell == nil {
+            cell = UITableViewCell(style: UITableViewCellStyle.init(rawValue: 3)!, reuseIdentifier: self.cellReuseIdentifier)
+        }
+        
         let servicer = self.servicers[(indexPath as NSIndexPath).row]
 
         
-        cell.textLabel?.text = servicer.name
-        cell.detailTextLabel?.text = servicer.specialty
+        cell?.textLabel?.text = servicer.name
+        cell?.detailTextLabel?.text = servicer.specialty
         
-        return cell
+        return cell!
 
     }
     
@@ -83,6 +80,15 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
        return self.servicers.count
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedRow = indexPath.row
+        performSegue(withIdentifier: "showProfile", sender: self)
+        
+    }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let providerVC = segue.destination as! ProviderViewController
+        providerVC.providerInfo = servicers[selectedRow]
+    }
     
 }
