@@ -11,4 +11,12 @@ import Foundation
 struct Servicer {
     var name: String
     var specialty: String
+    var id: Int
+}
+
+struct Review {
+    var id: Int
+    var user_id: Int
+    var servicer_id: Int
+    var content: String
 }

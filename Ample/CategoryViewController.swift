@@ -46,7 +46,8 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
                     let servicers = servicersJSON.map({(servicerJSON: [String: Any]) -> Servicer in
                         return Servicer(
                             name: servicerJSON["name"] as! String,
-                            specialty: servicerJSON["specialty"] as! String
+                            specialty: servicerJSON["specialty"] as! String,
+                            id: servicerJSON["id"] as! Int
                         )
                     })
                     DispatchQueue.main.async {
