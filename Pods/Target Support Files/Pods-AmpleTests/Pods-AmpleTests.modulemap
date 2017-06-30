@@ -1,6 +1,0 @@
-framework module Pods_AmpleTests {
-  umbrella header "Pods-AmpleTests-umbrella.h"
-
-  export *
-  module * { export * }
-}
