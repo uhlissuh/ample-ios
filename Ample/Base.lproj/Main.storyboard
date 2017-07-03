@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="X0I-zm-DZQ">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -13,7 +13,7 @@
         <!--Search-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
-                <viewController id="9pv-A4-QxB" userLabel="Search" customClass="SearchViewController" customModule="Ample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchViewController" id="9pv-A4-QxB" userLabel="Search" customClass="SearchViewController" customModule="Ample" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ia1-K6-d13"/>
                         <viewControllerLayoutGuide type="bottom" id="4ug-Mw-9AY"/>
@@ -23,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="GPV-gQ-E8p" userLabel="Main Container Stack View">
-                                <rect key="frame" x="16" y="144" width="343" height="404"/>
+                                <rect key="frame" x="16" y="100" width="343" height="497"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="qB9-LT-Rfz" userLabel="Search Stack View">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="149"/>
@@ -80,7 +80,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="B2G-UE-PWa" userLabel="Categories Stack View">
-                                        <rect key="frame" x="0.0" y="169" width="343" height="235"/>
+                                        <rect key="frame" x="0.0" y="169" width="343" height="328"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Browse Categories:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S07-T1-fCV" userLabel="Browse Categories:">
                                                 <rect key="frame" x="0.0" y="0.0" width="343" height="35"/>
@@ -92,13 +92,13 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="qoC-n3-7EI" userLabel="Button Stack View">
-                                                <rect key="frame" x="0.0" y="45" width="343" height="190"/>
+                                                <rect key="frame" x="0.0" y="45" width="343" height="283"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="izd-sK-vrD" userLabel="First Button Row Stack View">
-                                                        <rect key="frame" x="0.0" y="0.0" width="343" height="85"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="343" height="131.5"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dyN-X2-Rne">
-                                                                <rect key="frame" x="0.0" y="0.0" width="94.5" height="85"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="94.5" height="131.5"/>
                                                                 <color key="backgroundColor" red="0.70301042420000004" green="0.84334646420000003" blue="0.88373282070000003" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <state key="normal" title="Medical">
                                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -113,7 +113,7 @@
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NCY-2F-chk">
-                                                                <rect key="frame" x="124.5" y="0.0" width="94" height="85"/>
+                                                                <rect key="frame" x="124.5" y="0.0" width="94" height="131.5"/>
                                                                 <color key="backgroundColor" red="0.70301042420000004" green="0.84334646420000003" blue="0.88373282070000003" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <state key="normal" title="Wellness">
                                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -128,7 +128,7 @@
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WRz-P5-9VI">
-                                                                <rect key="frame" x="248.5" y="0.0" width="94.5" height="85"/>
+                                                                <rect key="frame" x="248.5" y="0.0" width="94.5" height="131.5"/>
                                                                 <color key="backgroundColor" red="0.70301042420000004" green="0.84334646420000003" blue="0.88373282070000003" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <state key="normal" title="Beauty">
                                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -145,10 +145,10 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="NMf-7R-y7Q" userLabel="Second Button Row Stack View">
-                                                        <rect key="frame" x="0.0" y="105" width="343" height="85"/>
+                                                        <rect key="frame" x="0.0" y="151.5" width="343" height="131.5"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PJD-TK-BDe">
-                                                                <rect key="frame" x="0.0" y="0.0" width="94.5" height="85"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="94.5" height="131.5"/>
                                                                 <color key="backgroundColor" red="0.70301042420000004" green="0.84334646420000003" blue="0.88373282070000003" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <state key="normal" title="Therapy">
                                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -163,7 +163,7 @@
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a27-v0-xhy">
-                                                                <rect key="frame" x="124.5" y="0.0" width="94" height="85"/>
+                                                                <rect key="frame" x="124.5" y="0.0" width="94" height="131.5"/>
                                                                 <color key="backgroundColor" red="0.70301042420000004" green="0.84334646420000003" blue="0.88373282070000003" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <state key="normal" title="Shopping">
                                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -178,7 +178,7 @@
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VLp-my-yW4">
-                                                                <rect key="frame" x="248.5" y="0.0" width="94.5" height="85"/>
+                                                                <rect key="frame" x="248.5" y="0.0" width="94.5" height="131.5"/>
                                                                 <color key="backgroundColor" red="0.70301042420000004" green="0.84334646420000003" blue="0.88373282070000003" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <state key="normal" title="Professional">
                                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -221,7 +221,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1688.8" y="-320.68965517241384"/>
+            <point key="canvasLocation" x="2628" y="-320.68965517241384"/>
         </scene>
         <!--Category-->
         <scene sceneID="PQf-mD-P72">
@@ -344,7 +344,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="2391.1999999999998" y="-321.58920539730138"/>
+            <point key="canvasLocation" x="3330.4000000000001" y="-321.58920539730138"/>
         </scene>
         <!--Provider View Controller-->
         <scene sceneID="gpl-Up-ocD">
@@ -420,7 +420,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yyf-4M-4gW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3104.8000000000002" y="-322.48875562218893"/>
+            <point key="canvasLocation" x="4044" y="-322.48875562218893"/>
         </scene>
         <!--Second View Controller-->
         <scene sceneID="wg7-f3-ORb">
@@ -460,7 +460,49 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="750" y="360"/>
+            <point key="canvasLocation" x="1828" y="358"/>
+        </scene>
+        <!--Login View Controller-->
+        <scene sceneID="2m1-Vp-JeY">
+            <objects>
+                <viewController id="uNv-mX-AgI" customClass="LoginViewController" customModule="Ample" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dEm-R3-59j"/>
+                        <viewControllerLayoutGuide type="bottom" id="wow-5p-yud"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="GTs-P0-pgU">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QLD-8y-ulr">
+                                <rect key="frame" x="112" y="224" width="150" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.82652020768043966" green="0.89801819026535368" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Log in with Phone"/>
+                                <connections>
+                                    <action selector="loginPhone:" destination="uNv-mX-AgI" eventType="touchUpInside" id="kS8-75-geb"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UQb-Ws-9yG">
+                                <rect key="frame" x="112" y="306" width="150" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.82652020770000001" green="0.89801819029999996" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Log in with Email"/>
+                                <connections>
+                                    <action selector="loginEmail:" destination="uNv-mX-AgI" eventType="touchUpInside" id="cdR-0f-Zaa"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Cpi-kS-fNw"/>
+                    <connections>
+                        <segue destination="49e-Tb-3d3" kind="show" identifier="showSearchAfterLogin" animates="NO" id="gC3-c9-M6U"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FFq-G9-dhY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="167.19999999999999" y="-0.44977511244377816"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -479,7 +521,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="0.0" y="0.0"/>
+            <point key="canvasLocation" x="938.39999999999998" y="-0.44977511244377816"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="fDR-Fy-V3q">
@@ -498,10 +540,28 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mbo-3K-fwr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="749.60000000000002" y="-320.68965517241384"/>
+            <point key="canvasLocation" x="1828" y="-322.48875562218893"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="efU-NC-3zU">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="X0I-zm-DZQ" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="s7z-HK-AnA">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="uNv-mX-AgI" kind="relationship" relationship="rootViewController" id="Daa-tE-eIu"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tFm-ra-6ih" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-772" y="-0.44977511244377816"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="751-Ua-HpP"/>
+        <segue reference="71E-qu-KLw"/>
     </inferredMetricsTieBreakers>
 </document>
