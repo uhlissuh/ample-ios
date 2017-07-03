@@ -17,17 +17,14 @@ class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+//        accountKit.logOut()
         dataEntryViewController = accountKit.viewControllerForLoginResume() as? AKFViewController
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if accountKit.currentAccessToken != nil {
-            print("User is already logged in, going to SearchController")
-            DispatchQueue.main.async(execute: {
-                self.performSegue(withIdentifier: "showSearchAfterLogin", sender: self)
-            })
-        }
+            presentWithSegueIdentifier("showSearchAfterLogin", animated: false)        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -56,6 +53,16 @@ class LoginViewController: UIViewController {
         viewController.delegate = self
     }
     
+    fileprivate func presentWithSegueIdentifier(_ segueIdentifier: String, animated: Bool) {
+        if animated {
+            performSegue(withIdentifier: segueIdentifier, sender: nil)
+        } else {
+            UIView.performWithoutAnimation {
+                self.performSegue(withIdentifier: segueIdentifier, sender: nil)
+            }
+        }
+    }
+    
 }
 
 extension LoginViewController: AKFViewControllerDelegate {
@@ -64,7 +71,7 @@ extension LoginViewController: AKFViewControllerDelegate {
     }
     
     func viewController(_ viewController: UIViewController!, didCompleteLoginWith accessToken: AKFAccessToken, state: String!) {
-        print("successful login, have accessToken")
+        presentWithSegueIdentifier("showSearchAfterLogin", animated: true)
     }
 }
 

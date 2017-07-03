@@ -23,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="GPV-gQ-E8p" userLabel="Main Container Stack View">
-                                <rect key="frame" x="16" y="100" width="343" height="497"/>
+                                <rect key="frame" x="16" y="144" width="343" height="404"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="qB9-LT-Rfz" userLabel="Search Stack View">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="149"/>
@@ -80,7 +80,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="B2G-UE-PWa" userLabel="Categories Stack View">
-                                        <rect key="frame" x="0.0" y="169" width="343" height="328"/>
+                                        <rect key="frame" x="0.0" y="169" width="343" height="235"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Browse Categories:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S07-T1-fCV" userLabel="Browse Categories:">
                                                 <rect key="frame" x="0.0" y="0.0" width="343" height="35"/>
@@ -92,13 +92,13 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="qoC-n3-7EI" userLabel="Button Stack View">
-                                                <rect key="frame" x="0.0" y="45" width="343" height="283"/>
+                                                <rect key="frame" x="0.0" y="45" width="343" height="190"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="izd-sK-vrD" userLabel="First Button Row Stack View">
-                                                        <rect key="frame" x="0.0" y="0.0" width="343" height="131.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="343" height="85"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dyN-X2-Rne">
-                                                                <rect key="frame" x="0.0" y="0.0" width="94.5" height="131.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="94.5" height="85"/>
                                                                 <color key="backgroundColor" red="0.70301042420000004" green="0.84334646420000003" blue="0.88373282070000003" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <state key="normal" title="Medical">
                                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -113,7 +113,7 @@
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NCY-2F-chk">
-                                                                <rect key="frame" x="124.5" y="0.0" width="94" height="131.5"/>
+                                                                <rect key="frame" x="124.5" y="0.0" width="94" height="85"/>
                                                                 <color key="backgroundColor" red="0.70301042420000004" green="0.84334646420000003" blue="0.88373282070000003" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <state key="normal" title="Wellness">
                                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -128,7 +128,7 @@
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WRz-P5-9VI">
-                                                                <rect key="frame" x="248.5" y="0.0" width="94.5" height="131.5"/>
+                                                                <rect key="frame" x="248.5" y="0.0" width="94.5" height="85"/>
                                                                 <color key="backgroundColor" red="0.70301042420000004" green="0.84334646420000003" blue="0.88373282070000003" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <state key="normal" title="Beauty">
                                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -145,10 +145,10 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="NMf-7R-y7Q" userLabel="Second Button Row Stack View">
-                                                        <rect key="frame" x="0.0" y="151.5" width="343" height="131.5"/>
+                                                        <rect key="frame" x="0.0" y="105" width="343" height="85"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PJD-TK-BDe">
-                                                                <rect key="frame" x="0.0" y="0.0" width="94.5" height="131.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="94.5" height="85"/>
                                                                 <color key="backgroundColor" red="0.70301042420000004" green="0.84334646420000003" blue="0.88373282070000003" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <state key="normal" title="Therapy">
                                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -163,7 +163,7 @@
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a27-v0-xhy">
-                                                                <rect key="frame" x="124.5" y="0.0" width="94" height="131.5"/>
+                                                                <rect key="frame" x="124.5" y="0.0" width="94" height="85"/>
                                                                 <color key="backgroundColor" red="0.70301042420000004" green="0.84334646420000003" blue="0.88373282070000003" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <state key="normal" title="Shopping">
                                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -178,7 +178,7 @@
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VLp-my-yW4">
-                                                                <rect key="frame" x="248.5" y="0.0" width="94.5" height="131.5"/>
+                                                                <rect key="frame" x="248.5" y="0.0" width="94.5" height="85"/>
                                                                 <color key="backgroundColor" red="0.70301042420000004" green="0.84334646420000003" blue="0.88373282070000003" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <state key="normal" title="Professional">
                                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -298,18 +298,18 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Axv-Bq-MtK" id="TB5-Ya-yUt">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ev6-gI-ffP">
-                                                    <rect key="frame" x="15" y="4" width="34" height="21"/>
+                                                    <rect key="frame" x="15" y="5" width="33.5" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="x0M-Em-wEG">
-                                                    <rect key="frame" x="15" y="25" width="33" height="15"/>
+                                                    <rect key="frame" x="15" y="25.5" width="33" height="14.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
@@ -374,18 +374,18 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Lql-x7-Ro4" id="BFJ-wd-hw6">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="YaS-My-Atp">
-                                                    <rect key="frame" x="15" y="4" width="34" height="21"/>
+                                                    <rect key="frame" x="15" y="5" width="33.5" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1hD-gp-uib">
-                                                    <rect key="frame" x="15" y="25" width="44" height="15"/>
+                                                    <rect key="frame" x="15" y="25.5" width="44" height="14.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
