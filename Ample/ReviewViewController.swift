@@ -7,20 +7,25 @@
 //
 
 import UIKit
+import MapKit
 
-class ReviewViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
-
-    @IBOutlet weak var categoryField: UITextField!
+class ReviewViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, MKLocalSearchCompleterDelegate {
+    @IBOutlet weak var fatFriendlySlider: UISlider!
+    @IBOutlet weak var submitButton: UIButton!
+    @IBOutlet weak var reviewField: UITextView!
+    @IBOutlet weak var skillSlider: UISlider!
     @IBOutlet weak var specialtyField: UITextField!
     @IBOutlet weak var phoneField: UITextField!
+    @IBOutlet weak var categoryField: UITextField!
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var addressField: UITextField!
-    @IBOutlet weak var reviewField: UITextView!
-    @IBOutlet weak var submitButton: UIButton!
-    @IBOutlet weak var skillSlider: UISlider!
-    @IBOutlet weak var fatfriendlySlider: UISlider!
+    @IBOutlet weak var scrollView: UIScrollView!
+    var searchCompleter = MKLocalSearchCompleter()
+    var searchResults = [MKLocalSearchCompletion]()
+
+
     var reviewContent: String = ""
-    var enoughFieldsFilledOut: Bool = false
+    
     var categoryOptions = ["Medical", "Wellness", "Beauty", "Therapy", "Shopping", "Professional", "Fitness", "Restaurants" ]
 
     
@@ -28,8 +33,14 @@ class ReviewViewController: UIViewController, UITextViewDelegate, UITextFieldDel
         
         super.viewDidLoad()
         
+        scrollView.contentSize = CGSize(width: 375, height: 750)
+        
+        searchCompleter.delegate = self
+        
+        
         let pickerView = UIPickerView()
         pickerView.delegate = self
+        categoryField.inputView = pickerView
         reviewField.delegate = self
         nameField.delegate = self
         addressField.delegate = self
@@ -40,8 +51,59 @@ class ReviewViewController: UIViewController, UITextViewDelegate, UITextFieldDel
         addressField.addTarget(self, action: #selector(editingChanged), for: .editingChanged)
 
 
+        let toolBar = UIToolbar(frame: CGRect(x: 0, y: self.view.frame.size.height/6, width: self.view.frame.size.width, height: 40.0))
+        
+        toolBar.layer.position = CGPoint(x: self.view.frame.size.width/2, y: self.view.frame.size.height-20.0)
+        
+        toolBar.barStyle = UIBarStyle.blackTranslucent
+        
+        toolBar.tintColor = UIColor.white
+        
+        toolBar.backgroundColor = UIColor.cyan
+        
+        let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(ReviewViewController.donePressed))
+        
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: self, action: nil)
+        
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width / 3, height: self.view.frame.size.height))
+        
+        label.font = UIFont(name: "Helvetica", size: 12)
+        
+        label.backgroundColor = UIColor.clear
+        
+        label.textColor = UIColor.white
+        
+        label.text = "Category"
+        
+        label.textAlignment = NSTextAlignment.center
+        
+        let textBtn = UIBarButtonItem(customView: label)
+        
+        toolBar.setItems([flexSpace,textBtn,flexSpace,doneButton], animated: true)
+        
+        categoryField.inputAccessoryView = toolBar
 
-        // Do any additional setup after loading the view.
+    }
+    
+//    delegate methods for map autocomplete
+    func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
+        searchResults = completer.results
+        print("RESULTSSSSSSSSS", searchResults)
+    }
+    
+    func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
+        print(error)
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        searchCompleter.queryFragment = textField.text!
+        return true
+    }
+
+//
+    
+    func donePressed(_ sender: UIBarButtonItem) {
+        categoryField.resignFirstResponder()
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -98,3 +160,4 @@ class ReviewViewController: UIViewController, UITextViewDelegate, UITextFieldDel
     }
 
 }
+
