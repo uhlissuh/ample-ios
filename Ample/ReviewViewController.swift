@@ -8,8 +8,10 @@
 
 import UIKit
 import MapKit
+import AutoCompletion
 
 class ReviewViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, MKLocalSearchCompleterDelegate {
+    
     @IBOutlet weak var fatFriendlySlider: UISlider!
     @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var reviewField: UITextView!
@@ -37,8 +39,9 @@ class ReviewViewController: UIViewController, UITextViewDelegate, UITextFieldDel
         
         searchCompleter.delegate = self
         
-        
         let pickerView = UIPickerView()
+        let completerResultsTableView = UITableView()
+        
         pickerView.delegate = self
         categoryField.inputView = pickerView
         reviewField.delegate = self
@@ -50,7 +53,27 @@ class ReviewViewController: UIViewController, UITextViewDelegate, UITextFieldDel
         nameField.addTarget(self, action: #selector(editingChanged), for: .editingChanged)
         addressField.addTarget(self, action: #selector(editingChanged), for: .editingChanged)
 
+        setupToolbarOnPicker()
+        
+    }
+    
+//    delegate methods for map autocomplete
+    func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
+        searchResults = completer.results
+        print("RESULTSSSSSSSSS", searchResults)
+    }
+    
+    func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
+        print(error)
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        searchCompleter.queryFragment = textField.text!
+        return true
+    }
 
+//
+    func setupToolbarOnPicker() {
         let toolBar = UIToolbar(frame: CGRect(x: 0, y: self.view.frame.size.height/6, width: self.view.frame.size.width, height: 40.0))
         
         toolBar.layer.position = CGPoint(x: self.view.frame.size.width/2, y: self.view.frame.size.height-20.0)
@@ -84,23 +107,6 @@ class ReviewViewController: UIViewController, UITextViewDelegate, UITextFieldDel
         categoryField.inputAccessoryView = toolBar
 
     }
-    
-//    delegate methods for map autocomplete
-    func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
-        searchResults = completer.results
-        print("RESULTSSSSSSSSS", searchResults)
-    }
-    
-    func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
-        print(error)
-    }
-    
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        searchCompleter.queryFragment = textField.text!
-        return true
-    }
-
-//
     
     func donePressed(_ sender: UIBarButtonItem) {
         categoryField.resignFirstResponder()
