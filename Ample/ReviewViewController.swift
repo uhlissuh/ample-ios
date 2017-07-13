@@ -8,10 +8,13 @@
 
 import UIKit
 import MapKit
-import AutoCompletion
+import SearchTextField
+
 
 class ReviewViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, MKLocalSearchCompleterDelegate {
     
+    @IBOutlet weak var addressField: SearchTextField!
+    @IBOutlet weak var nameField: SearchTextField!
     @IBOutlet weak var fatFriendlySlider: UISlider!
     @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var reviewField: UITextView!
@@ -19,11 +22,8 @@ class ReviewViewController: UIViewController, UITextViewDelegate, UITextFieldDel
     @IBOutlet weak var specialtyField: UITextField!
     @IBOutlet weak var phoneField: UITextField!
     @IBOutlet weak var categoryField: UITextField!
-    @IBOutlet weak var nameField: UITextField!
-    @IBOutlet weak var addressField: UITextField!
     @IBOutlet weak var scrollView: UIScrollView!
     var searchCompleter = MKLocalSearchCompleter()
-    var searchResults = [MKLocalSearchCompletion]()
 
 
     var reviewContent: String = ""
@@ -40,7 +40,6 @@ class ReviewViewController: UIViewController, UITextViewDelegate, UITextFieldDel
         searchCompleter.delegate = self
         
         let pickerView = UIPickerView()
-        let completerResultsTableView = UITableView()
         
         pickerView.delegate = self
         categoryField.inputView = pickerView
@@ -55,21 +54,44 @@ class ReviewViewController: UIViewController, UITextViewDelegate, UITextFieldDel
 
         setupToolbarOnPicker()
         
+        configureAddressField()
+        
     }
     
 //    delegate methods for map autocomplete
     func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
-        searchResults = completer.results
-        print("RESULTSSSSSSSSS", searchResults)
+        let searchTextFieldItems = completer.results.map({ (searchCompletion: MKLocalSearchCompletion) -> SearchTextFieldItem in
+            SearchTextFieldItem(title: searchCompletion.title, subtitle: searchCompletion.subtitle)
+        })
+        self.addressField.filterItems(searchTextFieldItems)
+        self.addressField.stopLoadingIndicator()
+        
     }
     
     func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
         print(error)
+        self.addressField.stopLoadingIndicator()
     }
     
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        searchCompleter.queryFragment = textField.text!
-        return true
+    
+    fileprivate func configureAddressField() {
+        addressField.startVisible = true
+        addressField.theme.cellHeight = 75
+        addressField.highlightAttributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 18)]
+
+        addressField.theme.font = UIFont.systemFont(ofSize: 18)
+        addressField.userStoppedTypingHandler = {
+            if (self.addressField.text != nil) {
+                self.searchCompleter.queryFragment = self.addressField.text!
+                self.addressField.showLoadingIndicator()
+     
+            }
+        }
+        addressField.itemSelectionHandler = { filteredResults, itemPosition in
+            let item = filteredResults[itemPosition]
+            
+            self.addressField.text = item.title + ", " + item.subtitle!
+        }
     }
 
 //
