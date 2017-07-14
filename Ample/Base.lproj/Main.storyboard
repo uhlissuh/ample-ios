@@ -523,7 +523,7 @@
                         <outlet property="reviewField" destination="hYg-2g-2LQ" id="BHy-em-s3z"/>
                         <outlet property="scrollView" destination="sPa-AH-WUv" id="PRY-z9-5ge"/>
                         <outlet property="skillSlider" destination="ya5-Hj-ocr" id="Lvt-Vg-XYg"/>
-                        <outlet property="specialtyField" destination="v4P-0x-MH3" id="wfb-dp-18u"/>
+                        <outlet property="subcategoryField" destination="v4P-0x-MH3" id="72s-Du-WdX"/>
                         <outlet property="submitButton" destination="Ejq-Mu-oei" id="oJ4-Og-1mH"/>
                     </connections>
                 </viewController>

@@ -12,7 +12,7 @@ import SearchTextField
 
 
 class ReviewViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate, MKLocalSearchCompleterDelegate {
-    @IBOutlet weak var specialtyField: SearchTextField!
+    @IBOutlet weak var subcategoryField: SearchTextField!
     @IBOutlet weak var categoryField: SearchTextField!
     @IBOutlet weak var addressField: SearchTextField!
     @IBOutlet weak var nameField: SearchTextField!
@@ -40,6 +40,8 @@ class ReviewViewController: UIViewController, UITextViewDelegate, UITextFieldDel
         submitButton.isEnabled = false
         nameField.addTarget(self, action: #selector(editingChanged), for: .editingChanged)
         addressField.addTarget(self, action: #selector(editingChanged), for: .editingChanged)
+        subcategoryField.isEnabled = false
+        categoryField.addTarget(self, action: #selector(pickedCategory), for: .editingChanged)
         
         configureAddressField()
         configureNameField()
@@ -117,6 +119,13 @@ class ReviewViewController: UIViewController, UITextViewDelegate, UITextFieldDel
             self.categoryField.filterStrings(categories)
         }
     }
+    
+    fileprivate func configureSubcategoryField() {
+        subcategoryField.theme.cellHeight = 75
+        subcategoryField.theme.bgColor = UIColor.white
+        subcategoryField.highlightAttributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 18)]
+        subcategoryField.theme.font = UIFont.systemFont(ofSize: 18)
+    }
 
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -132,6 +141,10 @@ class ReviewViewController: UIViewController, UITextViewDelegate, UITextFieldDel
             }
         }
         enableOrDisableSubmitButton()
+    }
+    
+    func pickedCategory(_ textField: UITextField) {
+        subcategoryField.isEnabled = true
     }
     
     func textViewDidChange(_ textView: UITextView) {
