@@ -37,9 +37,8 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func getServicersForCategory(buttonTag: Int, completionHandler: @escaping ([Servicer]) -> Void) {
-        let session = URLSession.shared
         let url = URL(string: "http://localhost:8000/categories/" + String(buttonTag))!
-        let task = session.dataTask(with: url) { (data, response, error) -> Void in
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) -> Void in
             do {
                 if let data = data {
                     let servicersJSON = try JSONSerialization.jsonObject(with: data, options: []) as! [[String: Any]]

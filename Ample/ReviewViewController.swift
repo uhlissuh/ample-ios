@@ -113,10 +113,9 @@ class ReviewViewController: UIViewController, UITextViewDelegate, UITextFieldDel
         categoryField.highlightAttributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 18)]
         categoryField.theme.font = UIFont.systemFont(ofSize: 18)
         
-        let categories = ["Medical", "Wellness", "Beauty", "Therapy", "Shopping", "Professional", "Fitness", "Restaurants" ]
-        
-        categoryField.filterStrings(categories)
-
+        getAllCategories() {(categories) in
+            self.categoryField.filterStrings(categories)
+        }
     }
 
     
@@ -157,5 +156,25 @@ class ReviewViewController: UIViewController, UITextViewDelegate, UITextFieldDel
         // Dispose of any resources that can be recreated.
     }
 
+    func getAllCategories(completionHandler: @escaping ([String]) -> Void){
+        let url = URL(string: "http://localhost:8000/allcategories")
+        let task = URLSession.shared.dataTask(with: url!) { (data, response, error) -> Void in
+            do {
+                if let data = data {
+                    let categoriesJSON = try JSONSerialization.jsonObject(with: data, options: []) as! [[String: Any]]
+                    let categories = categoriesJSON.map({(categoryJSON: [String: Any]) -> String in
+                        return categoryJSON["name"] as! String
+                    })
+                    DispatchQueue.main.async {
+                        completionHandler(categories)
+                    }
+                }
+            } catch let parseError as NSError {
+                print("JSON Error \(parseError.localizedDescription)")
+            }
+        }
+        task.resume()
+
+    }
 }
 
