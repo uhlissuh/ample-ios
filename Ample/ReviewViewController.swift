@@ -55,6 +55,7 @@ class ReviewViewController: UIViewController, UITextViewDelegate, UITextFieldDel
         setupToolbarOnPicker()
         
         configureAddressField()
+        configureNameField()
         
     }
     
@@ -63,20 +64,47 @@ class ReviewViewController: UIViewController, UITextViewDelegate, UITextFieldDel
         let searchTextFieldItems = completer.results.map({ (searchCompletion: MKLocalSearchCompletion) -> SearchTextFieldItem in
             SearchTextFieldItem(title: searchCompletion.title, subtitle: searchCompletion.subtitle)
         })
-        self.addressField.filterItems(searchTextFieldItems)
-        self.addressField.stopLoadingIndicator()
+        if nameField.isFirstResponder {
+            self.nameField.filterItems(searchTextFieldItems)
+            self.nameField.stopLoadingIndicator()
+        } else {
+            self.addressField.filterItems(searchTextFieldItems)
+            self.addressField.stopLoadingIndicator()
+        }
+        
         
     }
     
     func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
         print(error)
         self.addressField.stopLoadingIndicator()
+        self.nameField.stopLoadingIndicator()
     }
     
+    fileprivate func configureNameField() {
+        nameField.startVisible = true
+        nameField.theme.cellHeight = 75
+        nameField.theme.bgColor = UIColor.white
+        nameField.theme.font = UIFont.systemFont(ofSize: 18)
+        nameField.highlightAttributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 18)]
+        nameField.userStoppedTypingHandler = {
+            if (self.nameField.text != nil) {
+                self.searchCompleter.queryFragment = self.nameField.text!
+                self.nameField.showLoadingIndicator()
+                
+            }
+        }
+        nameField.itemSelectionHandler = { filteredResults, itemPosition in
+            let item = filteredResults[itemPosition]
+            self.nameField.text = item.title
+            self.addressField.text = item.subtitle
+        }
+    }
     
     fileprivate func configureAddressField() {
         addressField.startVisible = true
         addressField.theme.cellHeight = 75
+        addressField.theme.bgColor = UIColor.white
         addressField.highlightAttributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 18)]
 
         addressField.theme.font = UIFont.systemFont(ofSize: 18)
@@ -89,9 +117,12 @@ class ReviewViewController: UIViewController, UITextViewDelegate, UITextFieldDel
         }
         addressField.itemSelectionHandler = { filteredResults, itemPosition in
             let item = filteredResults[itemPosition]
-            
             self.addressField.text = item.title + ", " + item.subtitle!
         }
+    }
+    
+    fileprivate func configureCategory() {
+        
     }
 
 //
