@@ -46,6 +46,7 @@ class ReviewViewController: UIViewController, UITextViewDelegate, UITextFieldDel
         configureAddressField()
         configureNameField()
         configureCategoryField()
+        configureSubcategoryField()
     }
     
 //    delegate methods for map autocomplete
@@ -118,6 +119,14 @@ class ReviewViewController: UIViewController, UITextViewDelegate, UITextFieldDel
         getAllCategories() {(categories) in
             self.categoryField.filterStrings(categories)
         }
+        categoryField.itemSelectionHandler = { filteredResults, itemPosition in
+            let item = filteredResults[itemPosition]
+            self.categoryField.text = item.title
+            self.getSubcategoriesForCategory(category: item.title) {(subcategories) in
+                self.subcategoryField.filterStrings(subcategories)
+            }
+            
+        }
     }
     
     fileprivate func configureSubcategoryField() {
@@ -189,5 +198,27 @@ class ReviewViewController: UIViewController, UITextViewDelegate, UITextFieldDel
         task.resume()
 
     }
+    
+    func getSubcategoriesForCategory(category: String, completionHandler: @escaping ([String]) -> Void){
+        let url = URL(string: "http://localhost:8000/" + category + "/allsubcategories")
+        let task = URLSession.shared.dataTask(with: url!) { (data, response, error) -> Void in
+            do {
+                if let data = data {
+                    let subcategoriesJSON = try JSONSerialization.jsonObject(with: data, options: []) as! [[String: Any]]
+                    let subcategories = subcategoriesJSON.map({(subcategoryJSON: [String: Any]) -> String in
+                        return subcategoryJSON["name"] as! String
+                    })
+                    DispatchQueue.main.async {
+                        completionHandler(subcategories)
+                    }
+                }
+            } catch let parseError as NSError {
+                print("JSON Error \(parseError.localizedDescription)")
+            }
+        }
+        task.resume()
+        
+    }
+
 }
 
