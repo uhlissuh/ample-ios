@@ -51,6 +51,7 @@ class ReviewViewController: UIViewController, UITextViewDelegate, UITextFieldDel
     
 //    delegate methods for map autocomplete
     func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
+        print(completer.results)
         let searchTextFieldItems = completer.results.map({ (searchCompletion: MKLocalSearchCompletion) -> SearchTextFieldItem in
             SearchTextFieldItem(title: searchCompletion.title, subtitle: searchCompletion.subtitle)
         })
