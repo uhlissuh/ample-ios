@@ -8,7 +8,6 @@
 
 import UIKit
 import MapKit
-import MapKit
 import CoreLocation
 
 
@@ -23,15 +22,18 @@ class SearchViewController: UIViewController, MKLocalSearchCompleterDelegate, CL
     var currentUserLocation = CLLocation()
     var categoriesList: [String] = []
     var filteredCategories: [String] = []
+    var locationResults: [MKLocalSearchCompletion] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         locationManager.delegate = self
         searchCompleter.delegate = self
         categorySearchField.delegate = self
+        locationSearchField.delegate = self
         resultsTableView.delegate = self
         resultsTableView.dataSource = self
-        categorySearchField.addTarget(self, action: #selector(editingChanged), for: .editingChanged)
+        categorySearchField.addTarget(self, action: #selector(categoryEditingChanged), for: .editingChanged)
+        locationSearchField.addTarget(self, action: #selector(locationEditingChanged), for: .editingChanged)
         
         setupLocationServices()
         
@@ -40,7 +42,22 @@ class SearchViewController: UIViewController, MKLocalSearchCompleterDelegate, CL
         }
     }
     
-    func editingChanged(){
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField == locationSearchField {
+            locationResults.removeAll()
+        } else if textField == categorySearchField {
+            filteredCategories.removeAll()
+        }
+        resultsTableView.reloadData()
+    }
+    
+    func locationEditingChanged() {
+        if locationSearchField.text != "" {
+            self.searchCompleter.queryFragment = locationSearchField.text!
+        }
+    }
+    
+    func categoryEditingChanged(){
         filterContent(searchText: categorySearchField.text!)
     }
     
@@ -57,10 +74,9 @@ class SearchViewController: UIViewController, MKLocalSearchCompleterDelegate, CL
             locationManager.requestWhenInUseAuthorization()
         }
         
-        locationManager.distanceFilter = 100.0  // In meters.
-        locationManager.startUpdatingLocation()
-        
         if authStatus == .authorizedWhenInUse {
+            locationManager.distanceFilter = 100.0  // In meters.
+            locationManager.startUpdatingLocation()
             locationSearchField.text = "Near Current Location"
             locationSearchField.textColor = UIColor.blue
         }
@@ -71,10 +87,8 @@ class SearchViewController: UIViewController, MKLocalSearchCompleterDelegate, CL
     }
     
     func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
-//        let searchTextFieldItems = completer.results.map({ (searchCompletion: MKLocalSearchCompletion) -> [String] in
-//            SearchTextFieldItem(title: searchCompletion.title, subtitle: searchCompletion.subtitle)
-//        })
-        //make this create cells for each item in searchtextfield items
+        locationResults = completer.results
+        resultsTableView.reloadData()
     }
     
     func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
@@ -84,21 +98,45 @@ class SearchViewController: UIViewController, MKLocalSearchCompleterDelegate, CL
 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "searchResultCell", for: indexPath)
-        cell.textLabel?.text = filteredCategories[indexPath.row]
-        return cell
+        if categorySearchField.isFirstResponder {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "searchResultCell", for: indexPath)
+            cell.textLabel?.text = filteredCategories[indexPath.row]
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "locationCell", for: indexPath)
+            cell.textLabel?.text = locationResults[indexPath.row].title
+            cell.detailTextLabel?.text = locationResults[indexPath.row].subtitle
+            return cell
+        }
+        
     }
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filteredCategories.count
+        if categorySearchField.isFirstResponder {
+           return filteredCategories.count
+        } else {
+            return locationResults.count
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let currentCell = tableView.cellForRow(at: indexPath)! as UITableViewCell
-        categorySearchField.text = currentCell.textLabel?.text
-        filteredCategories.removeAll()
-        resultsTableView.reloadData()
+        if categorySearchField.isFirstResponder {
+            let currentCell = tableView.cellForRow(at: indexPath)! as UITableViewCell
+            categorySearchField.text = currentCell.textLabel?.text
+            filteredCategories.removeAll()
+            resultsTableView.reloadData()
+        } else {
+            let currentCell = tableView.cellForRow(at: indexPath)! as UITableViewCell
+            if ((currentCell.detailTextLabel?.text) != nil) {
+                locationSearchField.text = (currentCell.textLabel?.text)! + ", " + (currentCell.detailTextLabel?.text!)!
+            } else {
+                locationSearchField.text = currentCell.textLabel?.text
+            }
+            locationResults.removeAll()
+            resultsTableView.reloadData()
+        }
         
     }
 
