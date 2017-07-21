@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 struct Servicer {
     var name: String
@@ -19,4 +20,34 @@ struct Review {
     var user_id: Int
     var servicer_id: Int
     var content: String
+}
+
+struct Location {
+    var city: String
+    var country: String?
+    var address2: String?
+    var address3: String?
+    var state: String
+    var address1: String?
+    var zipCode: String?
+}
+
+struct Category {
+    var alias: String?
+    var title: String?
+}
+
+
+
+struct Business {
+    var rating: Int?
+    var price: String?
+    var phone: String
+    var id: String?
+    var isClosed: Bool?
+    var categories: [Category]
+    var name: String
+    var coordinates: (latitude: Double, longitude: Double)
+    var imageUrl: String?
+    var location: Location?
 }
