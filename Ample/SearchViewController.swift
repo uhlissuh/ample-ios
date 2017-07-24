@@ -64,8 +64,8 @@ class SearchViewController: UIViewController, MKLocalSearchCompleterDelegate, CL
     }
     
     @IBAction func goButton(_ sender: Any) {
-        mainBottomView.addSubview(businessTableView)
         updatedBusinesses.removeAll()
+        mainBottomView.addSubview(businessTableView)
         getBusinesses(termString: categorySearchField.text!, location: locationSearchField.text!) { (businesses) in
             self.updatedBusinesses = businesses
             self.businessTableView.reloadData()
@@ -83,6 +83,10 @@ class SearchViewController: UIViewController, MKLocalSearchCompleterDelegate, CL
     }
     
     func locationEditingChanged() {
+        if self.mainBottomView.subviews.contains(businessTableView) == true {
+            self.businessTableView.removeFromSuperview()
+        }
+        
         focusedField = "location"
         if locationSearchField.text != "" {
             self.searchCompleter.queryFragment = locationSearchField.text!
@@ -90,13 +94,17 @@ class SearchViewController: UIViewController, MKLocalSearchCompleterDelegate, CL
     }
     
     func categoryEditingChanged(){
+        if self.mainBottomView.subviews.contains(businessTableView) == true {
+            self.businessTableView.removeFromSuperview()
+        }
         focusedField = "category"
         filterContent(searchText: categorySearchField.text!)
     }
     
     func filterContent(searchText: String) {
+        filteredCategories.removeAll()
         filteredCategories = categoriesList.filter { (category) -> Bool in
-            return category.lowercased().contains(searchText)
+            return category.lowercased().contains(searchText.lowercased())
         }
         resultsTableView.reloadData()
     }
@@ -120,6 +128,9 @@ class SearchViewController: UIViewController, MKLocalSearchCompleterDelegate, CL
     }
     
     func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
+        print(locationResults)
+        print(self.mainBottomView.subviews.contains(resultsTableView))
+        print(resultsTableView)
         locationResults = completer.results
         resultsTableView.reloadData()
     }
@@ -152,23 +163,18 @@ class SearchViewController: UIViewController, MKLocalSearchCompleterDelegate, CL
                 }
             }
             cell.name.text = updatedBusinesses[indexPath.row].name
-            cell.category.text = updatedBusinesses[indexPath.row].categories[0].title
+            if updatedBusinesses[indexPath.row].categories.count >= 1 {
+                cell.category.text = updatedBusinesses[indexPath.row].categories[0].title
+            } else {
+                cell.category.text = ""
+
+            }
+            
             return cell
         }
         
     }
     
-//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-//        if textField == categorySearchField {
-//            focusedField = "category"
-//        } else if textField == locationSearchField {
-//            focusedField = "location"
-//        }
-//        resultsTableView.reloadData()
-//        print(focusedField)
-//        return true
-//    }
-//    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if focusedField == "category" {
@@ -226,75 +232,77 @@ class SearchViewController: UIViewController, MKLocalSearchCompleterDelegate, CL
         
     }
     
+    
+    func calloutForBusinesses(termString: String, latitude: Double, longitude: Double, completionHandler: @escaping ([Business]) -> Void) {
+        let queryItems = [NSURLQueryItem( name: "term", value: termString), NSURLQueryItem(name: "latitude", value: String(describing: latitude)), NSURLQueryItem( name: "longitude", value: String(describing: longitude))]
+        let urlComps = NSURLComponents(string: "http://localhost:8000/businesses/search")!
+        urlComps.queryItems = queryItems as [URLQueryItem]?
+        let url = urlComps.url!
+        
+        
+        let task = URLSession.shared.dataTask(with: url)  { (data, response, error) -> Void in
+            do {
+                if let data = data {
+                    let responseJSON = try JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
+                    let businessesJSON = responseJSON["businesses"] as! [[String: Any]]
+                    print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^", businessesJSON)
+                    let businesses = businessesJSON.map({(businessJSON: [String: Any]) -> Business in
+                        let coordinatesJSON = businessJSON["coordinates"] as! [String: Any]
+                        let locationJSON = businessJSON["location"] as! [String: Any]
+                        return Business(
+                            rating: businessJSON["rating"] as? Int,
+                            price: businessJSON["price"] as? String,
+                            phone: businessJSON["phone"] as! String,
+                            id: businessJSON["id"] as? String,
+                            isClosed: businessJSON["is_closed"] as? Bool,
+                            categories: (businessJSON["categories"] as! [[String: Any]]).map({(category: [String: Any]) -> Category in
+                                return Category(
+                                    alias: category["alias"] as? String,
+                                    title: category["title"] as? String
+                                )
+                            }),
+                            name: businessJSON["name"] as! String,
+                            coordinates: (latitude: coordinatesJSON["latitude"] as! Double, longitude: coordinatesJSON["longitude"] as! Double),
+                            imageUrl: businessJSON["image_url"] as? String,
+                            location: Location(
+                                city: locationJSON["city"] as! String,
+                                country: locationJSON["country"] as? String,
+                                address2: locationJSON["address2"] as? String,
+                                address3: locationJSON["address3"] as? String,
+                                state: locationJSON["state"] as! String,
+                                address1: locationJSON["address1"] as? String,
+                                zipCode: locationJSON["zip_code"] as? String
+                            )
+                        )
+                    })
+                    DispatchQueue.main.async {
+                        completionHandler(businesses)
+                    }
+                }
+            } catch let parseError as NSError {
+                print("JSON Error \(parseError.localizedDescription)")
+            }
+        }
+        task.resume()
+    }
+    
     func getBusinesses(termString: String, location: String, completionHandler: @escaping ([Business]) -> Void) {
-        var latitude: Double? = nil
-        var longitude: Double? = nil
         if location == "Near Current Location" {
-            latitude = currentUserLocation.coordinate.latitude
-            longitude = currentUserLocation.coordinate.longitude
+            let latitude = currentUserLocation.coordinate.latitude
+            let longitude = currentUserLocation.coordinate.longitude
+            calloutForBusinesses(termString: termString, latitude: latitude, longitude: longitude, completionHandler: completionHandler)
         } else {
             geocoder.geocodeAddressString(location, completionHandler: { (placemarks, error) in
                 self.searchTargetLocation = (placemarks?[0].location)!
-                latitude = self.searchTargetLocation.coordinate.latitude
-                longitude = self.searchTargetLocation.coordinate.longitude
+                var latitude = self.searchTargetLocation.coordinate.latitude
+                var longitude = self.searchTargetLocation.coordinate.longitude
                 if (error != nil) {
-                    latitude = self.currentUserLocation.coordinate.latitude
-                    longitude = self.currentUserLocation.coordinate.longitude
+                    latitude = Double(37.7749)
+                    longitude = Double(-122.4194)
                 }
-                let queryItems = [NSURLQueryItem( name: "term", value: termString), NSURLQueryItem(name: "latitude", value: String(describing: latitude!)), NSURLQueryItem( name: "longitude", value: String(describing: longitude!))]
-                let urlComps = NSURLComponents(string: "http://localhost:8000/businesses/search")!
-                urlComps.queryItems = queryItems as [URLQueryItem]?
-                let url = urlComps.url!
-                
-                
-                let task = URLSession.shared.dataTask(with: url)  { (data, response, error) -> Void in
-                    do {
-                        if let data = data {
-                            let responseJSON = try JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
-                            let businessesJSON = responseJSON["businesses"] as! [[String: Any]]
-                            print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^", businessesJSON)
-                            let businesses = businessesJSON.map({(businessJSON: [String: Any]) -> Business in
-                                let coordinatesJSON = businessJSON["coordinates"] as! [String: Any]
-                                let locationJSON = businessJSON["location"] as! [String: Any]
-                                return Business(
-                                    rating: businessJSON["rating"] as? Int,
-                                    price: businessJSON["price"] as? String,
-                                    phone: businessJSON["phone"] as! String,
-                                    id: businessJSON["id"] as? String,
-                                    isClosed: businessJSON["is_closed"] as? Bool,
-                                    categories: (businessJSON["categories"] as! [[String: Any]]).map({(category: [String: Any]) -> Category in
-                                        return Category(
-                                            alias: category["alias"] as? String,
-                                            title: category["title"] as? String
-                                        )
-                                    }),
-                                    name: businessJSON["name"] as! String,
-                                    coordinates: (latitude: coordinatesJSON["latitude"] as! Double, longitude: coordinatesJSON["longitude"] as! Double),
-                                    imageUrl: businessJSON["image_url"] as? String,
-                                    location: Location(
-                                        city: locationJSON["city"] as! String,
-                                        country: locationJSON["country"] as? String,
-                                        address2: locationJSON["address2"] as? String,
-                                        address3: locationJSON["address3"] as? String,
-                                        state: locationJSON["state"] as! String,
-                                        address1: locationJSON["address1"] as? String,
-                                        zipCode: locationJSON["zip_code"] as? String
-                                    )
-                                )
-                            })
-                            DispatchQueue.main.async {
-                                completionHandler(businesses)
-                            }
-                        }
-                    } catch let parseError as NSError {
-                        print("JSON Error \(parseError.localizedDescription)")
-                    }
-                }
-                task.resume()
+                self.calloutForBusinesses(termString: termString, latitude: latitude, longitude: longitude, completionHandler: completionHandler)
             })
         }
-   
     }
- 
-    }
+}
 
