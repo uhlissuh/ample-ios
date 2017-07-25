@@ -42,7 +42,8 @@ class SearchViewController: UIViewController, MKLocalSearchCompleterDelegate, CL
         resultsTableView.dataSource = self
         categorySearchField.addTarget(self, action: #selector(categoryEditingChanged), for: .editingChanged)
         locationSearchField.addTarget(self, action: #selector(locationEditingChanged), for: .editingChanged)
-        
+        goButton.layer.cornerRadius = 5
+
         setupLocationServices()
         
         getAllCategoryTitles { (categories) in
@@ -195,12 +196,12 @@ class SearchViewController: UIViewController, MKLocalSearchCompleterDelegate, CL
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if categorySearchField.isFirstResponder {
+        if focusedField == "category" {
             let currentCell = tableView.cellForRow(at: indexPath)! as UITableViewCell
             categorySearchField.text = currentCell.textLabel?.text
             filteredCategories.removeAll()
             resultsTableView.reloadData()
-        } else {
+        } else if focusedField == "location" {
             let currentCell = tableView.cellForRow(at: indexPath)! as UITableViewCell
             if ((currentCell.detailTextLabel?.text) != nil) {
                 locationSearchField.text = (currentCell.textLabel?.text)! + ", " + (currentCell.detailTextLabel?.text!)!
@@ -209,6 +210,8 @@ class SearchViewController: UIViewController, MKLocalSearchCompleterDelegate, CL
             }
             locationResults.removeAll()
             resultsTableView.reloadData()
+        } else {
+            performSegue(withIdentifier: "showBusinessDisplay", sender: self)
         }
         
     }
@@ -303,6 +306,13 @@ class SearchViewController: UIViewController, MKLocalSearchCompleterDelegate, CL
                 self.calloutForBusinesses(termString: termString, latitude: latitude, longitude: longitude, completionHandler: completionHandler)
             })
         }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let path = self.businessTableView.indexPathForSelectedRow
+        let selectedBusiness = updatedBusinesses[(path?.row)!]
+        let businessdisplayVC = segue.destination as! BusinessDisplayViewController
+        businessdisplayVC.business = selectedBusiness
     }
 }
 
