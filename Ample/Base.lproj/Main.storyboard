@@ -241,23 +241,14 @@
                                         <rect key="frame" x="0.0" y="200" width="343" height="339"/>
                                         <subviews>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hcU-w3-xa9">
-                                                <rect key="frame" x="0.0" y="0.0" width="343" height="306"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="343" height="315.5"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </tableView>
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UTn-mu-G2t">
-                                                <rect key="frame" x="0.0" y="309" width="343" height="30"/>
+                                                <rect key="frame" x="0.0" y="318.5" width="343" height="20.5"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Map View" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1JD-Vr-9Mo">
-                                                        <rect key="frame" x="0.0" y="0.0" width="202" height="30"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <color key="textColor" red="1" green="0.45036037839999998" blue="0.76329996229999997" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="View Yelp Reviews" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MAR-cw-k9l">
-                                                        <rect key="frame" x="202" y="0.0" width="141" height="30"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="30" id="fed-bJ-K1r"/>
-                                                        </constraints>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Map View" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1JD-Vr-9Mo">
+                                                        <rect key="frame" x="0.0" y="0.0" width="343" height="20.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" red="1" green="0.45036037839999998" blue="0.76329996229999997" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -310,27 +301,80 @@
                                         <rect key="frame" x="0.0" y="0.0" width="333" height="627"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Review For Title of Business" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7y2-GH-vtg">
-                                                <rect key="frame" x="0.0" y="0.0" width="333" height="23.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="333" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="gWf-7G-Yfm"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="gag-Es-8LL">
-                                                <rect key="frame" x="-2" y="31.5" width="337" height="61"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="60" id="Npo-cE-MuZ"/>
-                                                </constraints>
-                                            </slider>
-                                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="IaR-Ed-Kfh">
-                                                <rect key="frame" x="-2" y="99.5" width="337" height="61"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="60" id="VMH-Kf-07Q"/>
-                                                </constraints>
-                                            </slider>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="RlE-uw-V6f">
-                                                <rect key="frame" x="0.0" y="167.5" width="333" height="401.5"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fat-friendly rating:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4zd-B8-zkd">
+                                                <rect key="frame" x="0.0" y="58" width="333" height="22.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="1" green="0.45036037839999998" blue="0.76329996229999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2HP-9A-YH6">
+                                                <rect key="frame" x="0.0" y="88.5" width="333" height="80"/>
+                                                <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pink-thumbs-down-100" translatesAutoresizingMaskIntoConstraints="NO" id="vID-gI-SCo">
+                                                        <rect key="frame" x="0.0" y="0.0" width="30" height="80"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="80" id="1a1-L7-Aau"/>
+                                                            <constraint firstAttribute="width" constant="30" id="xEk-Cs-YrG"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="gag-Es-8LL">
+                                                        <rect key="frame" x="28" y="0.0" width="277" height="81"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="80" id="Npo-cE-MuZ"/>
+                                                        </constraints>
+                                                    </slider>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pink-thumbs-up-100" translatesAutoresizingMaskIntoConstraints="NO" id="1yJ-Vh-xwm">
+                                                        <rect key="frame" x="303" y="0.0" width="30" height="80"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="30" id="QHW-d9-J5U"/>
+                                                            <constraint firstAttribute="height" constant="80" id="rOB-O5-Z6M"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                </subviews>
+                                            </stackView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Skill-rating:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I53-jd-EVN">
+                                                <rect key="frame" x="0.0" y="176.5" width="333" height="22"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="1" green="0.45036037839999998" blue="0.76329996229999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iGJ-Gf-gCG">
+                                                <rect key="frame" x="0.0" y="206.5" width="333" height="80"/>
+                                                <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pink-thumbs-down-100" translatesAutoresizingMaskIntoConstraints="NO" id="HwJ-kL-318">
+                                                        <rect key="frame" x="0.0" y="0.0" width="30" height="80"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="80" id="kqh-OE-4SM"/>
+                                                            <constraint firstAttribute="width" constant="30" id="qpZ-sz-0ax"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="D5M-he-Ie3">
+                                                        <rect key="frame" x="28" y="0.0" width="277" height="81"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="80" id="uIV-OX-Fut"/>
+                                                        </constraints>
+                                                    </slider>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pink-thumbs-up-100" translatesAutoresizingMaskIntoConstraints="NO" id="03z-sa-v0Q">
+                                                        <rect key="frame" x="303" y="0.0" width="30" height="80"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="80" id="ixC-er-HvW"/>
+                                                            <constraint firstAttribute="width" constant="30" id="v3t-nw-us3"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                </subviews>
+                                            </stackView>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Review Here! " textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="RlE-uw-V6f">
+                                                <rect key="frame" x="0.0" y="294.5" width="333" height="274.5"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
@@ -571,4 +615,8 @@
             <point key="canvasLocation" x="-772" y="-0.44977511244377816"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="pink-thumbs-down-100" width="100" height="100"/>
+        <image name="pink-thumbs-up-100" width="100" height="100"/>
+    </resources>
 </document>
