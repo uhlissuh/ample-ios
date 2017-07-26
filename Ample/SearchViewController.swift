@@ -129,9 +129,6 @@ class SearchViewController: UIViewController, MKLocalSearchCompleterDelegate, CL
     }
     
     func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
-        print(locationResults)
-        print(self.mainBottomView.subviews.contains(resultsTableView))
-        print(resultsTableView)
         locationResults = completer.results
         resultsTableView.reloadData()
     }

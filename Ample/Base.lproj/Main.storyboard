@@ -234,6 +234,9 @@
                                                 <state key="normal" title="Add a Review">
                                                     <color key="titleColor" red="0.98452872037887573" green="0.98457604646682739" blue="0.95815902948379517" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="ReviewButton:" destination="Wcj-5X-ct9" eventType="touchUpInside" id="sCV-8v-F04"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -276,16 +279,17 @@
                         <outlet property="cityLabel" destination="xQ2-F0-7hb" id="QEl-eA-RRD"/>
                         <outlet property="phoneLabel" destination="OYU-Nk-B7R" id="bcj-CM-2Zs"/>
                         <outlet property="titleLabel" destination="Tbf-oa-HI2" id="rby-N3-hLD"/>
+                        <segue destination="zji-CS-01f" kind="presentation" identifier="showMakeReview" id="8Bj-Cl-QQu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gsg-bg-UYc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3365.5999999999999" y="-321.58920539730138"/>
+            <point key="canvasLocation" x="3351" y="-322"/>
         </scene>
         <!--Make Review Controller-->
         <scene sceneID="yNB-Wr-N9E">
             <objects>
-                <viewController id="zji-CS-01f" userLabel="Make Review Controller" sceneMemberID="viewController">
+                <viewController id="zji-CS-01f" userLabel="Make Review Controller" customClass="MakeReviewViewController" customModule="Ample" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gcM-os-6Wb"/>
                         <viewControllerLayoutGuide type="bottom" id="qRo-ga-dFj"/>
@@ -297,10 +301,10 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="5Ma-AL-Krh">
                                 <rect key="frame" x="21" y="25" width="333" height="627"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="iuc-rD-fvb">
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="iuc-rD-fvb">
                                         <rect key="frame" x="0.0" y="0.0" width="333" height="627"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Review For Title of Business" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7y2-GH-vtg">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Review For Title of Business" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7y2-GH-vtg">
                                                 <rect key="frame" x="0.0" y="0.0" width="333" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="gWf-7G-Yfm"/>
@@ -310,13 +314,13 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fat-friendly rating:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4zd-B8-zkd">
-                                                <rect key="frame" x="0.0" y="58" width="333" height="22.5"/>
+                                                <rect key="frame" x="0.0" y="58" width="333" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="1" green="0.45036037839999998" blue="0.76329996229999997" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2HP-9A-YH6">
-                                                <rect key="frame" x="0.0" y="88.5" width="333" height="80"/>
+                                                <rect key="frame" x="0.0" y="86.5" width="333" height="80"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pink-thumbs-down-100" translatesAutoresizingMaskIntoConstraints="NO" id="vID-gI-SCo">
                                                         <rect key="frame" x="0.0" y="0.0" width="30" height="80"/>
@@ -330,6 +334,9 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="80" id="Npo-cE-MuZ"/>
                                                         </constraints>
+                                                        <connections>
+                                                            <action selector="fatFriendlySliderMoved:" destination="zji-CS-01f" eventType="valueChanged" id="8Ym-EP-aE7"/>
+                                                        </connections>
                                                     </slider>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pink-thumbs-up-100" translatesAutoresizingMaskIntoConstraints="NO" id="1yJ-Vh-xwm">
                                                         <rect key="frame" x="303" y="0.0" width="30" height="80"/>
@@ -340,14 +347,14 @@
                                                     </imageView>
                                                 </subviews>
                                             </stackView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Skill-rating:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I53-jd-EVN">
-                                                <rect key="frame" x="0.0" y="176.5" width="333" height="22"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Skill Rating:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I53-jd-EVN">
+                                                <rect key="frame" x="0.0" y="174.5" width="333" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="1" green="0.45036037839999998" blue="0.76329996229999997" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iGJ-Gf-gCG">
-                                                <rect key="frame" x="0.0" y="206.5" width="333" height="80"/>
+                                                <rect key="frame" x="0.0" y="203" width="333" height="80"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pink-thumbs-down-100" translatesAutoresizingMaskIntoConstraints="NO" id="HwJ-kL-318">
                                                         <rect key="frame" x="0.0" y="0.0" width="30" height="80"/>
@@ -371,16 +378,16 @@
                                                     </imageView>
                                                 </subviews>
                                             </stackView>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Review Here! " textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="RlE-uw-V6f">
-                                                <rect key="frame" x="0.0" y="294.5" width="333" height="274.5"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="RlE-uw-V6f">
+                                                <rect key="frame" x="0.0" y="291" width="333" height="278"/>
+                                                <color key="backgroundColor" red="0.94572153141361259" green="0.94572153141361259" blue="0.94572153141361259" alpha="0.38810394503546097" colorSpace="calibratedRGB"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WPJ-ea-saW">
                                                 <rect key="frame" x="0.0" y="577" width="333" height="50"/>
-                                                <color key="backgroundColor" red="1" green="0.45036037839999998" blue="0.76329996229999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="5DE-13-koq"/>
                                                 </constraints>
@@ -402,10 +409,17 @@
                             <constraint firstItem="5Ma-AL-Krh" firstAttribute="top" secondItem="gcM-os-6Wb" secondAttribute="bottom" constant="5" id="i5w-8E-mib"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="businessTitle" destination="7y2-GH-vtg" id="IpR-al-Pin"/>
+                        <outlet property="fatFriendlySlider" destination="gag-Es-8LL" id="8Hp-QA-Ni1"/>
+                        <outlet property="reviewTextArea" destination="RlE-uw-V6f" id="s5L-wS-dmR"/>
+                        <outlet property="skillSlider" destination="D5M-he-Ie3" id="ymR-B9-2pF"/>
+                        <outlet property="submitButton" destination="WPJ-ea-saW" id="bew-wG-se6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y7K-LH-Ujs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4085.5999999999999" y="-322.48875562218893"/>
+            <point key="canvasLocation" x="4056.8000000000002" y="-322.48875562218893"/>
         </scene>
         <!--Review-->
         <scene sceneID="wg7-f3-ORb">

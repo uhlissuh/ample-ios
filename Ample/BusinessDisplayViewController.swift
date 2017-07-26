@@ -41,6 +41,15 @@ class BusinessDisplayViewController: UIViewController {
         categoriesLabel.text = categoriesString
 
     }
+    @IBAction func ReviewButton(_ sender: Any) {
+        performSegue(withIdentifier: "showMakeReview", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let reviewVC = segue.destination as! MakeReviewViewController
+        reviewVC.businessForReview = self.business
+        
+    }
 
     func getBusinessImage() {
         if business?.imageUrl != "" {
