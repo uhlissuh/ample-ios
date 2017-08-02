@@ -329,7 +329,7 @@
                                                             <constraint firstAttribute="width" constant="30" id="xEk-Cs-YrG"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="gag-Es-8LL">
+                                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="gag-Es-8LL">
                                                         <rect key="frame" x="28" y="0.0" width="277" height="81"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="80" id="Npo-cE-MuZ"/>
@@ -363,11 +363,14 @@
                                                             <constraint firstAttribute="width" constant="30" id="qpZ-sz-0ax"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="D5M-he-Ie3">
+                                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="D5M-he-Ie3">
                                                         <rect key="frame" x="28" y="0.0" width="277" height="81"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="80" id="uIV-OX-Fut"/>
                                                         </constraints>
+                                                        <connections>
+                                                            <action selector="skillSliderMoved:" destination="zji-CS-01f" eventType="valueChanged" id="wc7-TA-L7Y"/>
+                                                        </connections>
                                                     </slider>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pink-thumbs-up-100" translatesAutoresizingMaskIntoConstraints="NO" id="03z-sa-v0Q">
                                                         <rect key="frame" x="303" y="0.0" width="30" height="80"/>
@@ -395,6 +398,9 @@
                                                 <state key="normal" title="Submit">
                                                     <color key="titleColor" red="0.98452872037887573" green="0.98457604646682739" blue="0.95815902948379517" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="submitButtonPushed:" destination="zji-CS-01f" eventType="touchUpInside" id="vd8-s2-Nxj"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>

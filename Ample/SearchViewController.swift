@@ -140,7 +140,6 @@ class SearchViewController: UIViewController, MKLocalSearchCompleterDelegate, CL
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if focusedField == "category" {
-            print("inside cell for row at ", focusedField)
             let cell = tableView.dequeueReusableCell(withIdentifier: "searchResultCell", for: indexPath)
             cell.textLabel?.text = filteredCategories[indexPath.row]
             return cell
@@ -245,7 +244,6 @@ class SearchViewController: UIViewController, MKLocalSearchCompleterDelegate, CL
                 if let data = data {
                     let responseJSON = try JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
                     let businessesJSON = responseJSON["businesses"] as! [[String: Any]]
-                    print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^", businessesJSON)
                     let businesses = businessesJSON.map({(businessJSON: [String: Any]) -> Business in
                         let coordinatesJSON = businessJSON["coordinates"] as! [String: Any]
                         let locationJSON = businessJSON["location"] as! [String: Any]
