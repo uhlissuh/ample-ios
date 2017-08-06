@@ -278,6 +278,7 @@
                         <outlet property="categoriesLabel" destination="EWR-0q-vzi" id="d4U-lu-PTg"/>
                         <outlet property="cityLabel" destination="xQ2-F0-7hb" id="QEl-eA-RRD"/>
                         <outlet property="phoneLabel" destination="OYU-Nk-B7R" id="bcj-CM-2Zs"/>
+                        <outlet property="reviewTable" destination="hcU-w3-xa9" id="gfo-KM-cgf"/>
                         <outlet property="titleLabel" destination="Tbf-oa-HI2" id="rby-N3-hLD"/>
                         <segue destination="zji-CS-01f" kind="presentation" identifier="showMakeReview" id="8Bj-Cl-QQu"/>
                     </connections>

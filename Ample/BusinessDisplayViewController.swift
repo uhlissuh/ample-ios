@@ -8,9 +8,10 @@
 
 import UIKit
 
-class BusinessDisplayViewController: UIViewController {
+class BusinessDisplayViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var business: Business?
+    var reviewsList: [Review] = []
  
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
@@ -19,10 +20,14 @@ class BusinessDisplayViewController: UIViewController {
     @IBOutlet weak var phoneLabel: UILabel!
     @IBOutlet weak var categoriesLabel: UILabel!
     @IBOutlet weak var addReviewButton: UIButton!
+    @IBOutlet weak var reviewTable: UITableView!
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        reviewTable.delegate = self
+        reviewTable.dataSource = self
         
         titleLabel.text = business?.name
         addressLabel.text = business?.location?.address1
@@ -30,7 +35,7 @@ class BusinessDisplayViewController: UIViewController {
         phoneLabel.text = business?.phone
         addReviewButton.layer.cornerRadius = 5
         
-        getBusinessImage()
+        getAndSetBusinessImage()
         
         var categoriestitleArray: [String] = []
         for category in (business?.categories)! {
@@ -39,6 +44,11 @@ class BusinessDisplayViewController: UIViewController {
         let categoriesString = categoriestitleArray.joined(separator: ", ")
         
         categoriesLabel.text = categoriesString
+        
+        getReviewsForBusiness { (reviews) in
+            self.reviewsList = reviews
+            self.reviewTable.reloadData()
+        }
 
     }
     @IBAction func ReviewButton(_ sender: Any) {
@@ -51,7 +61,7 @@ class BusinessDisplayViewController: UIViewController {
         
     }
 
-    func getBusinessImage() {
+    func getAndSetBusinessImage() {
         if business?.imageUrl != "" {
             let url = URL(string: (business?.imageUrl)!)
             DispatchQueue.global().async {
@@ -61,6 +71,45 @@ class BusinessDisplayViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    func getReviewsForBusiness(completionHandler: @escaping ([Review]) -> Void) {
+        let url = URL(string: "http://localhost:8000/reviews/" + (business?.yelpId)!)
+        let task = URLSession.shared.dataTask(with: url!) { (data, response, error) -> Void in
+            do {
+                if let data = data {
+                    let reviewsJSON = try JSONSerialization.jsonObject(with: data, options: []) as! [[String: Any]]
+                    let reviews = reviewsJSON.map({(reviewJSON: [String: Any]) -> Review in
+                        return Review(
+                            id: reviewJSON["id"] as! Int,
+                            accountKitId: reviewJSON["accountKitId"] as! String,
+                            workerOrBizId: reviewJSON["workerOrBizId"] as! Int,
+                            content: reviewJSON["content"] as! String,
+                            timestamp: reviewJSON["timestamp"] as! TimeInterval,
+                            fatSlider: reviewJSON["fatSlider"] as! Int,
+                            skillSlider: reviewJSON["skillSlider"] as! Int
+                        )
+                    })
+                    DispatchQueue.main.async {
+                        completionHandler(reviews)
+                    }
+                }
+            } catch let parseError as NSError {
+                print("JSON Error \(parseError.localizedDescription)")
+            }
+        }
+        task.resume()
+
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = Bundle.main.loadNibNamed("ReviewTableViewCell", owner: self, options: nil)?.first as! ReviewTableViewCell
+        cell.reviewerField.text = String(reviewsList[indexPath.row].accountKitId)
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+       return reviewsList.count
     }
     
     

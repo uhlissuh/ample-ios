@@ -17,9 +17,13 @@ struct Servicer {
 
 struct Review {
     var id: Int
-    var user_id: Int
-    var servicer_id: Int
+    var accountKitId: String
+    var workerOrBizId: Int
     var content: String
+    var timestamp: TimeInterval
+    var fatSlider: Int
+    var skillSlider: Int
+    
 }
 
 struct Location {
@@ -37,13 +41,12 @@ struct Category {
     var title: String?
 }
 
-
-
 struct Business {
     var rating: Int?
     var price: String?
     var phone: String
     var id: String?
+    var yelpId: String
     var isClosed: Bool?
     var categories: [Category]
     var name: String

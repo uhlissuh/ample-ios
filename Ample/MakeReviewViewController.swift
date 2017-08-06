@@ -12,8 +12,8 @@ import AccountKit
 class MakeReviewViewController: UIViewController, UITextViewDelegate {
     
     var businessForReview: Business?
-    var fatFriendlyRating: Int = 0
-    var skillRating: Int = 0
+    var fatFriendlyRating: Float = 0.0
+    var skillRating: Float = 0.0
     var fatSliderChanged : Bool = false
     var accountKit = AKFAccountKit(responseType: .accessToken)
     var accountKitId: String = ""
@@ -56,19 +56,19 @@ class MakeReviewViewController: UIViewController, UITextViewDelegate {
     }
     
     @IBAction func skillSliderMoved(_ sender: UISlider) {
-        skillRating = Int(sender.value)
+        skillRating = sender.value
     }
     
     @IBAction func fatFriendlySliderMoved(_ sender: UISlider) {
-        fatFriendlyRating = Int(sender.value)
+        fatFriendlyRating = sender.value
         fatSliderChanged = true
         enableOrDisableSubmitButton()
     }
     
     @IBAction func submitButtonPushed(_ sender: Any) {
         if accountKitId != "" {
-            sendReviewToServer(){ (string) in
-                print(string)
+            sendReviewToServer(){ (reviewId) in
+                print(reviewId)
                 self.dismiss(animated: true, completion: nil)
             }
         } else {
@@ -89,17 +89,15 @@ class MakeReviewViewController: UIViewController, UITextViewDelegate {
         enableOrDisableSubmitButton()
     }
     
-    func sendReviewToServer(completionHandler: @escaping (String) -> Void) {
+    func sendReviewToServer(completionHandler: @escaping (Int) -> Void) {
         let currentTime = Int(Date().timeIntervalSince1970)
         
+        guard let businessForReview = businessForReview else {
+            return
+        }
+        
         let businessAndReview : [String: Any] = [
-            "businessName": (businessForReview?.name)!,
-            "businessAddress": businessForReview?.location?.address1 ?? "",
-            "businessAddress2": businessForReview?.location?.address2 ?? "",
-            "businessCity": (businessForReview?.location?.city)!,
-            "businessState": (businessForReview?.location?.state)!,
-            "latitude": String(businessForReview!.coordinates.latitude),
-            "longitude": String(businessForReview!.coordinates.longitude),
+            "businessYelpId" : businessForReview.yelpId,
             "fatFriendlyRating" : fatFriendlyRating,
             "skillRating" : skillRating,
             "reviewContent" : reviewTextArea.text!,
@@ -126,12 +124,16 @@ class MakeReviewViewController: UIViewController, UITextViewDelegate {
         }
         
         let task = session.dataTask(with: request as URLRequest, completionHandler: {data, response, error -> Void in
-            if (data != nil) {
-                DispatchQueue.main.async {
-                    completionHandler("success")
+            do {
+                if let data = data {
+                    let responseJSON = try JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
+                    DispatchQueue.main.async {
+                        completionHandler(responseJSON["reviewId"] as! Int)
+                    }
                 }
+            } catch let parseError as NSError {
+                    print("JSON Error \(parseError.localizedDescription)")
             }
-
         })
         task.resume()
         

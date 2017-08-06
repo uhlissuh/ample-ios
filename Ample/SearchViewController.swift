@@ -251,7 +251,8 @@ class SearchViewController: UIViewController, MKLocalSearchCompleterDelegate, CL
                             rating: businessJSON["rating"] as? Int,
                             price: businessJSON["price"] as? String,
                             phone: businessJSON["phone"] as! String,
-                            id: businessJSON["id"] as? String,
+                            id: nil,
+                            yelpId: businessJSON["id"] as! String,
                             isClosed: businessJSON["is_closed"] as? Bool,
                             categories: (businessJSON["categories"] as! [[String: Any]]).map({(category: [String: Any]) -> Category in
                                 return Category(
