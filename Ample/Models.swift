@@ -9,21 +9,19 @@
 import Foundation
 import CoreLocation
 
-struct Servicer {
+struct User {
     var name: String
-    var specialty: String
-    var id: Int
+    var accountKitId: String
 }
 
 struct Review {
     var id: Int
-    var accountKitId: String
     var workerOrBizId: Int
     var content: String
     var timestamp: TimeInterval
     var fatSlider: Int
     var skillSlider: Int
-    
+    var reviewer: User
 }
 
 struct Location {

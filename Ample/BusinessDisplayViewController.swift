@@ -47,6 +47,7 @@ class BusinessDisplayViewController: UIViewController, UITableViewDelegate, UITa
         
         getReviewsForBusiness { (reviews) in
             self.reviewsList = reviews
+            print(self.reviewsList)
             self.reviewTable.reloadData()
         }
 
@@ -80,14 +81,18 @@ class BusinessDisplayViewController: UIViewController, UITableViewDelegate, UITa
                 if let data = data {
                     let reviewsJSON = try JSONSerialization.jsonObject(with: data, options: []) as! [[String: Any]]
                     let reviews = reviewsJSON.map({(reviewJSON: [String: Any]) -> Review in
+                        let userJSON = reviewJSON["user"] as! [String: Any]
                         return Review(
                             id: reviewJSON["id"] as! Int,
-                            accountKitId: reviewJSON["accountKitId"] as! String,
                             workerOrBizId: reviewJSON["workerOrBizId"] as! Int,
                             content: reviewJSON["content"] as! String,
                             timestamp: reviewJSON["timestamp"] as! TimeInterval,
                             fatSlider: reviewJSON["fatSlider"] as! Int,
-                            skillSlider: reviewJSON["skillSlider"] as! Int
+                            skillSlider: reviewJSON["skillSlider"] as! Int,
+                            reviewer: User(
+                                name: userJSON["name"] as! String,
+                                accountKitId: userJSON["accountKitId"] as! String
+                            )
                         )
                     })
                     DispatchQueue.main.async {
@@ -104,12 +109,25 @@ class BusinessDisplayViewController: UIViewController, UITableViewDelegate, UITa
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = Bundle.main.loadNibNamed("ReviewTableViewCell", owner: self, options: nil)?.first as! ReviewTableViewCell
-        cell.reviewerField.text = String(reviewsList[indexPath.row].accountKitId)
+        cell.reviewerField.text = String(reviewsList[indexPath.row].reviewer.name) + " says.."
+        let timestamp = (reviewsList[indexPath.row].timestamp)/1000
+        let timeSinceReview = Int(abs((Date(timeIntervalSince1970: timestamp).timeIntervalSinceNow)/86400))
+        if timeSinceReview == 1 {
+            cell.dateField.text = String(timeSinceReview) + " day ago"
+        } else {
+            cell.dateField.text = String(timeSinceReview) + " days ago"
+        }
+        
+        cell.contentArea.text = reviewsList[indexPath.row].content
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
        return reviewsList.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+       return 100
     }
     
     
