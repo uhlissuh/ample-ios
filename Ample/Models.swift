@@ -17,6 +17,7 @@ struct User {
 struct Review {
     var id: Int
     var workerOrBizId: Int
+    var workerOrBizName: String
     var content: String
     var timestamp: TimeInterval
     var fatSlider: Int

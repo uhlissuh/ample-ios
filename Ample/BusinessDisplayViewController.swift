@@ -85,6 +85,7 @@ class BusinessDisplayViewController: UIViewController, UITableViewDelegate, UITa
                         return Review(
                             id: reviewJSON["id"] as! Int,
                             workerOrBizId: reviewJSON["workerOrBizId"] as! Int,
+                            workerOrBizName: "",
                             content: reviewJSON["content"] as! String,
                             timestamp: reviewJSON["timestamp"] as! TimeInterval,
                             fatSlider: reviewJSON["fatSlider"] as! Int,

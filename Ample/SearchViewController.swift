@@ -28,9 +28,11 @@ class SearchViewController: UIViewController, MKLocalSearchCompleterDelegate, CL
     var filteredCategories: [String] = []
     var locationResults: [MKLocalSearchCompletion] = []
     var businessTableView: UITableView = UITableView()
+    var recentReviewsTableView: UITableView = UITableView()
     var updatedBusinesses: [Business] = []
     var searchTargetLocation = CLLocation()
     var focusedField: String = ""
+    var recentReviews: [Review] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,10 +52,14 @@ class SearchViewController: UIViewController, MKLocalSearchCompleterDelegate, CL
             self.categoriesList = categories
         }
         
+        mainBottomView.addSubview(recentReviewsTableView)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         setupBusinessTableView()
+        setupRecentReviewsTableView()
+        
     }
     
     func setupBusinessTableView() {
@@ -63,6 +69,21 @@ class SearchViewController: UIViewController, MKLocalSearchCompleterDelegate, CL
         businessTableView.delegate = self
         businessTableView.dataSource = self
     }
+    
+    func setupRecentReviewsTableView() {
+        let viewWidth = mainBottomView.frame.width
+        let viewHeight = mainBottomView.frame.height
+        recentReviewsTableView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: viewHeight)
+        recentReviewsTableView.delegate = self
+        recentReviewsTableView.dataSource = self
+        
+        
+        getRecentReviews() { (reviews) in
+            self.recentReviews = reviews
+            self.recentReviewsTableView.reloadData()
+        }
+    }
+    
     
     @IBAction func goButton(_ sender: Any) {
         updatedBusinesses.removeAll()
@@ -87,7 +108,9 @@ class SearchViewController: UIViewController, MKLocalSearchCompleterDelegate, CL
         if self.mainBottomView.subviews.contains(businessTableView) == true {
             self.businessTableView.removeFromSuperview()
         }
-        
+        if self.mainBottomView.subviews.contains(recentReviewsTableView) == true {
+            self.recentReviewsTableView.removeFromSuperview()
+        }
         focusedField = "location"
         if locationSearchField.text != "" {
             self.searchCompleter.queryFragment = locationSearchField.text!
@@ -97,6 +120,9 @@ class SearchViewController: UIViewController, MKLocalSearchCompleterDelegate, CL
     func categoryEditingChanged(){
         if self.mainBottomView.subviews.contains(businessTableView) == true {
             self.businessTableView.removeFromSuperview()
+        }
+        if self.mainBottomView.subviews.contains(recentReviewsTableView) == true {
+            self.recentReviewsTableView.removeFromSuperview()
         }
         focusedField = "category"
         filterContent(searchText: categorySearchField.text!)
@@ -148,7 +174,7 @@ class SearchViewController: UIViewController, MKLocalSearchCompleterDelegate, CL
             cell.textLabel?.text = locationResults[indexPath.row].title
             cell.detailTextLabel?.text = locationResults[indexPath.row].subtitle
             return cell
-        } else {
+        } else if tableView == businessTableView {
             let cell = Bundle.main.loadNibNamed("BusinessTableViewCell", owner: self, options: nil)?.first as! BusinessTableViewCell
             if (updatedBusinesses[indexPath.row].imageUrl != "") {
                 let url = URL(string: updatedBusinesses[indexPath.row].imageUrl!)
@@ -166,26 +192,42 @@ class SearchViewController: UIViewController, MKLocalSearchCompleterDelegate, CL
                 cell.category.text = ""
 
             }
-            
+            return cell
+        } else {
+            let cell = Bundle.main.loadNibNamed("ReviewTableViewCell", owner: self, options: nil)?.first as! ReviewTableViewCell
+            cell.reviewerField.text = recentReviews[indexPath.row].reviewer.name + " reviewing " + recentReviews[indexPath.row].workerOrBizName
+            cell.contentArea.text = recentReviews[indexPath.row].content
+            let timestamp = (recentReviews[indexPath.row].timestamp)/1000
+            let timeSinceReview = Int(abs((Date(timeIntervalSince1970: timestamp).timeIntervalSinceNow)/86400))
+            if timeSinceReview == 1 {
+                cell.dateField.text = String(timeSinceReview) + " day ago"
+            } else {
+                cell.dateField.text = String(timeSinceReview) + " days ago"
+            }
             return cell
         }
         
     }
     
+ 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if focusedField == "category" {
             return filteredCategories.count
         } else if focusedField == "location" {
             return locationResults.count
-        } else {
+        } else if tableView == businessTableView {
          return updatedBusinesses.count
+        } else {
+            return recentReviews.count
         }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if tableView == businessTableView {
             return 75
+        } else  if tableView == recentReviewsTableView{
+            return 100
         } else {
             return 44
         }
@@ -302,6 +344,39 @@ class SearchViewController: UIViewController, MKLocalSearchCompleterDelegate, CL
                 self.calloutForBusinesses(termString: termString, latitude: latitude, longitude: longitude, completionHandler: completionHandler)
             })
         }
+    }
+    
+    func getRecentReviews(completionHandler: @escaping ([Review]) -> Void){
+        let url = URL(string: "http://localhost:8000/recentreviews")
+        let task = URLSession.shared.dataTask(with: url!) { (data, response, error) -> Void in
+            do {
+                if let data = data {
+                    let reviewsJSON = try JSONSerialization.jsonObject(with: data, options: []) as! [[String: Any]]
+                    let reviews = reviewsJSON.map({(reviewJSON: [String: Any]) -> Review in
+                        let userJSON = reviewJSON["user"] as! [String: Any]
+                        return Review(
+                            id: reviewJSON["id"] as! Int,
+                            workerOrBizId: reviewJSON["workerOrBizId"] as! Int,
+                            workerOrBizName: reviewJSON["businessName"] as! String,
+                            content: reviewJSON["content"] as! String,
+                            timestamp: reviewJSON["timestamp"] as! TimeInterval,
+                            fatSlider: reviewJSON["fatSlider"] as! Int,
+                            skillSlider: reviewJSON["skillSlider"] as! Int,
+                            reviewer: User(
+                                name: userJSON["name"] as! String,
+                                accountKitId: userJSON["accountKitId"] as! String
+                            )
+                        )
+                    })
+                    DispatchQueue.main.async {
+                        completionHandler(reviews)
+                    }
+                }
+            } catch let parseError as NSError {
+                print("JSON Error \(parseError.localizedDescription)")
+            }
+        }
+        task.resume()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
