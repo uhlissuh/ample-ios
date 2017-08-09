@@ -16,6 +16,7 @@ class ProfileViewController: UIViewController {
     var accountKitId: String = ""
     var accountEmail: String = ""
     var accountPhoneNumber: String = ""
+    @IBOutlet weak var signOutButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,9 +34,8 @@ class ProfileViewController: UIViewController {
                 
             }
         }
+        signOutButton.layer.cornerRadius = 5
 
-
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {

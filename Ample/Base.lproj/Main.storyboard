@@ -23,12 +23,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="GPV-gQ-E8p" userLabel="Main Container Stack View">
-                                <rect key="frame" x="16" y="64" width="343" height="554"/>
+                                <rect key="frame" x="16" y="84" width="343" height="524"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="qB9-LT-Rfz" userLabel="Search Stack View">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="112"/>
                                         <subviews>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Find a fat friendly service category or business" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WOJ-nU-7fs" customClass="SearchTextField" customModule="SearchTextField">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Find a fat friendly service category or business" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WOJ-nU-7fs" customClass="SearchTextField" customModule="SearchTextField">
                                                 <rect key="frame" x="0.0" y="0.0" width="343" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="jbD-Jo-9yj"/>
@@ -40,7 +40,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="l1f-v5-7qU">
                                                 <rect key="frame" x="0.0" y="62" width="343" height="50"/>
                                                 <subviews>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Location" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BLG-vK-qgi" customClass="SearchTextField" customModule="SearchTextField">
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Location" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BLG-vK-qgi" customClass="SearchTextField" customModule="SearchTextField">
                                                         <rect key="frame" x="0.0" y="0.0" width="258" height="50"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="puE-Tf-KH8"/>
@@ -74,20 +74,20 @@
                                             </stackView>
                                         </subviews>
                                     </stackView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recently Reviewed on Everybody" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="heH-V0-Srn">
-                                        <rect key="frame" x="0.0" y="132" width="343" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="dIl-l0-Mia"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="9fG-Ib-Q7Z">
-                                        <rect key="frame" x="0.0" y="182" width="343" height="372"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="9fG-Ib-Q7Z">
+                                        <rect key="frame" x="0.0" y="132" width="343" height="392"/>
                                         <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recently Reviewed on Everybody" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="heH-V0-Srn">
+                                                <rect key="frame" x="0.0" y="0.0" width="343" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="dIl-l0-Mia"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="GillSans-Bold" family="Gill Sans" pointSize="19"/>
+                                                <color key="textColor" red="1" green="0.45036037839999998" blue="0.76329996229999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TNx-H1-Q0r">
-                                                <rect key="frame" x="0.0" y="0.0" width="343" height="372"/>
+                                                <rect key="frame" x="0.0" y="40" width="343" height="352"/>
                                                 <subviews>
                                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CSw-cL-F3h">
                                                         <rect key="frame" x="0.0" y="0.0" width="343" height="422"/>
@@ -151,9 +151,9 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="GPV-gQ-E8p" secondAttribute="bottom" id="ETk-xy-cFO"/>
+                            <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="GPV-gQ-E8p" secondAttribute="bottom" constant="10" id="ETk-xy-cFO"/>
                             <constraint firstAttribute="trailingMargin" secondItem="GPV-gQ-E8p" secondAttribute="trailing" id="SkL-Ah-r0h"/>
-                            <constraint firstItem="GPV-gQ-E8p" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" id="bm8-BL-pVW"/>
+                            <constraint firstItem="GPV-gQ-E8p" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="20" id="bm8-BL-pVW"/>
                             <constraint firstItem="GPV-gQ-E8p" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" id="qqr-gF-uZ3"/>
                         </constraints>
                     </view>
@@ -164,6 +164,7 @@
                         <outlet property="locationSearchField" destination="BLG-vK-qgi" id="XmM-83-90l"/>
                         <outlet property="mainBottomView" destination="TNx-H1-Q0r" id="Fbn-GZ-oK9"/>
                         <outlet property="resultsTableView" destination="CSw-cL-F3h" id="eaA-Yo-3wU"/>
+                        <outlet property="tableTitle" destination="heH-V0-Srn" id="ten-tu-dZW"/>
                         <segue destination="Wcj-5X-ct9" kind="show" identifier="showBusinessDisplay" id="ah4-84-Qzr"/>
                     </connections>
                 </viewController>
@@ -516,6 +517,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Profile" image="user-32" id="cPa-gy-q4n" userLabel="Profile"/>
                     <connections>
+                        <outlet property="signOutButton" destination="IHZ-mR-oXB" id="bB4-x7-tPM"/>
                         <outlet property="signedInNameField" destination="OqH-ff-ro4" id="kll-R9-MIp"/>
                     </connections>
                 </viewController>
@@ -534,33 +536,44 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QLD-8y-ulr">
-                                <rect key="frame" x="112" y="224" width="150" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="1" green="0.45036037839999998" blue="0.76329996229999997" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Log in with Phone">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="loginPhone:" destination="uNv-mX-AgI" eventType="touchUpInside" id="kS8-75-geb"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UQb-Ws-9yG">
-                                <rect key="frame" x="112" y="306" width="150" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="1" green="0.45036037839999998" blue="0.76329996229999997" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Log in with Email">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="loginEmail:" destination="uNv-mX-AgI" eventType="touchUpInside" id="cdR-0f-Zaa"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="75" translatesAutoresizingMaskIntoConstraints="NO" id="TCA-h6-hxl">
+                                <rect key="frame" x="112" y="195" width="151" height="122"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QLD-8y-ulr">
+                                        <rect key="frame" x="0.0" y="0.0" width="151" height="23.5"/>
+                                        <color key="backgroundColor" red="1" green="0.45036037839999998" blue="0.76329996229999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Log in with Phone">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="loginPhone:" destination="uNv-mX-AgI" eventType="touchUpInside" id="kS8-75-geb"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UQb-Ws-9yG">
+                                        <rect key="frame" x="0.0" y="98.5" width="151" height="23.5"/>
+                                        <color key="backgroundColor" red="1" green="0.45036037839999998" blue="0.76329996229999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Log in with Email">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="loginEmail:" destination="uNv-mX-AgI" eventType="touchUpInside" id="cdR-0f-Zaa"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="wow-5p-yud" firstAttribute="top" secondItem="TCA-h6-hxl" secondAttribute="bottom" constant="350" id="Jsn-gn-AeL"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="TCA-h6-hxl" secondAttribute="trailing" constant="96" id="VKz-4K-7gf"/>
+                            <constraint firstItem="TCA-h6-hxl" firstAttribute="leading" secondItem="GTs-P0-pgU" secondAttribute="leadingMargin" constant="96" id="f3d-uP-2qU"/>
+                            <constraint firstItem="TCA-h6-hxl" firstAttribute="top" secondItem="dEm-R3-59j" secondAttribute="bottom" constant="175" id="fLA-e6-yFZ"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Cpi-kS-fNw"/>
                     <connections>
+                        <outlet property="emailLoginButton" destination="UQb-Ws-9yG" id="vmE-MX-QDP"/>
+                        <outlet property="phoneLoginButton" destination="QLD-8y-ulr" id="oix-r2-0h0"/>
                         <segue destination="49e-Tb-3d3" kind="show" identifier="showSearchAfterLogin" animates="NO" id="gC3-c9-M6U"/>
                     </connections>
                 </viewController>

@@ -19,6 +19,7 @@ class SearchViewController: UIViewController, MKLocalSearchCompleterDelegate, CL
     @IBOutlet weak var goButton: UIButton!
     @IBOutlet weak var resultsTableView: UITableView!
     @IBOutlet weak var mainBottomView: UIView!
+    @IBOutlet weak var tableTitle: UILabel!
     
     var locationManager = CLLocationManager()
     var geocoder = CLGeocoder()
@@ -33,6 +34,10 @@ class SearchViewController: UIViewController, MKLocalSearchCompleterDelegate, CL
     var searchTargetLocation = CLLocation()
     var focusedField: String = ""
     var recentReviews: [Review] = []
+    var searchResultsLabel = UILabel()
+    
+
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,7 +50,6 @@ class SearchViewController: UIViewController, MKLocalSearchCompleterDelegate, CL
         categorySearchField.addTarget(self, action: #selector(categoryEditingChanged), for: .editingChanged)
         locationSearchField.addTarget(self, action: #selector(locationEditingChanged), for: .editingChanged)
         goButton.layer.cornerRadius = 5
-
         setupLocationServices()
         
         getAllCategoryTitles { (categories) in
@@ -59,13 +63,19 @@ class SearchViewController: UIViewController, MKLocalSearchCompleterDelegate, CL
     override func viewWillAppear(_ animated: Bool) {
         setupBusinessTableView()
         setupRecentReviewsTableView()
-        
+        searchResultsLabel.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 30)
+        searchResultsLabel.backgroundColor = UIColor(red:0.99, green:0.93, blue:0.96, alpha:1.0)
+        searchResultsLabel.textAlignment = .center
+        searchResultsLabel.font = UIFont(name: "GillSans-Bold", size: 19)
+        searchResultsLabel.textColor = UIColor(red:1.00, green:0.55, blue:0.79, alpha:1.0)
+        tableTitle.backgroundColor = UIColor(red:0.99, green:0.93, blue:0.96, alpha:1.0)
+
     }
     
     func setupBusinessTableView() {
         let screenWidth = UIScreen.main.bounds.width
         let viewHeight = mainBottomView.frame.height
-        businessTableView.frame = CGRect(x: 0, y: 0, width: screenWidth, height: viewHeight)
+        businessTableView.frame = CGRect(x: 0, y: 30, width: screenWidth, height: viewHeight)
         businessTableView.delegate = self
         businessTableView.dataSource = self
     }
@@ -88,6 +98,8 @@ class SearchViewController: UIViewController, MKLocalSearchCompleterDelegate, CL
     @IBAction func goButton(_ sender: Any) {
         updatedBusinesses.removeAll()
         mainBottomView.addSubview(businessTableView)
+        searchResultsLabel.text = "Search Results for " + categorySearchField.text!
+        mainBottomView.addSubview(searchResultsLabel)
         getBusinesses(termString: categorySearchField.text!, location: locationSearchField.text!) { (businesses) in
             self.updatedBusinesses = businesses
             self.businessTableView.reloadData()
@@ -106,9 +118,11 @@ class SearchViewController: UIViewController, MKLocalSearchCompleterDelegate, CL
     
     func locationEditingChanged() {
         if self.mainBottomView.subviews.contains(businessTableView) == true {
+            searchResultsLabel.removeFromSuperview()
             self.businessTableView.removeFromSuperview()
         }
         if self.mainBottomView.subviews.contains(recentReviewsTableView) == true {
+            self.tableTitle.removeFromSuperview()
             self.recentReviewsTableView.removeFromSuperview()
         }
         focusedField = "location"
@@ -119,9 +133,11 @@ class SearchViewController: UIViewController, MKLocalSearchCompleterDelegate, CL
     
     func categoryEditingChanged(){
         if self.mainBottomView.subviews.contains(businessTableView) == true {
+            self.searchResultsLabel.removeFromSuperview()
             self.businessTableView.removeFromSuperview()
         }
         if self.mainBottomView.subviews.contains(recentReviewsTableView) == true {
+            self.tableTitle.removeFromSuperview()
             self.recentReviewsTableView.removeFromSuperview()
         }
         focusedField = "category"
@@ -141,12 +157,19 @@ class SearchViewController: UIViewController, MKLocalSearchCompleterDelegate, CL
         if authStatus == .notDetermined {
             locationManager.requestWhenInUseAuthorization()
         }
-        
         if authStatus == .authorizedWhenInUse {
             locationManager.distanceFilter = 100.0  // In meters.
             locationManager.startUpdatingLocation()
             locationSearchField.text = "Near Current Location"
-            locationSearchField.textColor = UIColor.blue
+            locationSearchField.textColor = UIColor(red:1.00, green:0.55, blue:0.79, alpha:1.0)
+        }
+    }
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedWhenInUse {
+            locationManager.distanceFilter = 100.0  // In meters.
+            locationManager.startUpdatingLocation()
+            locationSearchField.text = "Near Current Location"
+            locationSearchField.textColor = UIColor(red:1.00, green:0.55, blue:0.79, alpha:1.0)
         }
     }
     
@@ -184,6 +207,8 @@ class SearchViewController: UIViewController, MKLocalSearchCompleterDelegate, CL
                         cell.businessImage.image =  UIImage(data: data!)
                     }
                 }
+            } else {
+                cell.businessImage.image = UIImage(named: "no-profile-picture-128.png")
             }
             cell.name.text = updatedBusinesses[indexPath.row].name
             if updatedBusinesses[indexPath.row].categories.count >= 1 {
@@ -274,7 +299,7 @@ class SearchViewController: UIViewController, MKLocalSearchCompleterDelegate, CL
     }
     
     
-    func calloutForBusinesses(termString: String, latitude: Double, longitude: Double, completionHandler: @escaping ([Business]) -> Void) {
+    func calloutToYelpForBusinesses(termString: String, latitude: Double, longitude: Double, completionHandler: @escaping ([Business]) -> Void) {
         let queryItems = [NSURLQueryItem( name: "term", value: termString), NSURLQueryItem(name: "latitude", value: String(describing: latitude)), NSURLQueryItem( name: "longitude", value: String(describing: longitude))]
         let urlComps = NSURLComponents(string: "http://localhost:8000/businesses/search")!
         urlComps.queryItems = queryItems as [URLQueryItem]?
@@ -331,7 +356,7 @@ class SearchViewController: UIViewController, MKLocalSearchCompleterDelegate, CL
         if location == "Near Current Location" {
             let latitude = currentUserLocation.coordinate.latitude
             let longitude = currentUserLocation.coordinate.longitude
-            calloutForBusinesses(termString: termString, latitude: latitude, longitude: longitude, completionHandler: completionHandler)
+            calloutToYelpForBusinesses(termString: termString, latitude: latitude, longitude: longitude, completionHandler: completionHandler)
         } else {
             geocoder.geocodeAddressString(location, completionHandler: { (placemarks, error) in
                 self.searchTargetLocation = (placemarks?[0].location)!
@@ -341,9 +366,13 @@ class SearchViewController: UIViewController, MKLocalSearchCompleterDelegate, CL
                     latitude = Double(37.7749)
                     longitude = Double(-122.4194)
                 }
-                self.calloutForBusinesses(termString: termString, latitude: latitude, longitude: longitude, completionHandler: completionHandler)
+                self.calloutToYelpForBusinesses(termString: termString, latitude: latitude, longitude: longitude, completionHandler: completionHandler)
             })
         }
+    }
+    
+    func callToServerForExistingBusinesses(){
+        
     }
     
     func getRecentReviews(completionHandler: @escaping ([Review]) -> Void){

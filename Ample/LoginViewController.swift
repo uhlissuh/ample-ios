@@ -14,10 +14,13 @@ class LoginViewController: UIViewController {
     fileprivate var accountKit = AKFAccountKit(responseType: .accessToken)
     fileprivate var dataEntryViewController: AKFViewController? = nil
 
+    @IBOutlet weak var phoneLoginButton: UIButton!
+    @IBOutlet weak var emailLoginButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        accountKit.logOut()
+        phoneLoginButton.layer.cornerRadius = 5
+        emailLoginButton.layer.cornerRadius = 5
         dataEntryViewController = accountKit.viewControllerForLoginResume() as? AKFViewController
     }
     
