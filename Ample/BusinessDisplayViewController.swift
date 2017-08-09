@@ -45,13 +45,17 @@ class BusinessDisplayViewController: UIViewController, UITableViewDelegate, UITa
         
         categoriesLabel.text = categoriesString
         
-        getReviewsForBusiness { (reviews) in
-            self.reviewsList = reviews
-            print(self.reviewsList)
-            self.reviewTable.reloadData()
-        }
+        
 
     }
+    override func viewWillAppear(_ animated: Bool) {
+        getReviewsForBusiness { (reviews) in
+            self.reviewsList = reviews
+            print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$", reviews)
+            self.reviewTable.reloadData()
+        }
+    }
+    
     @IBAction func ReviewButton(_ sender: Any) {
         performSegue(withIdentifier: "showMakeReview", sender: self)
     }

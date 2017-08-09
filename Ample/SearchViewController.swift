@@ -35,9 +35,7 @@ class SearchViewController: UIViewController, MKLocalSearchCompleterDelegate, CL
     var focusedField: String = ""
     var recentReviews: [Review] = []
     var searchResultsLabel = UILabel()
-    
 
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,8 +66,7 @@ class SearchViewController: UIViewController, MKLocalSearchCompleterDelegate, CL
         searchResultsLabel.textAlignment = .center
         searchResultsLabel.font = UIFont(name: "GillSans-Bold", size: 19)
         searchResultsLabel.textColor = UIColor(red:1.00, green:0.55, blue:0.79, alpha:1.0)
-        tableTitle.backgroundColor = UIColor(red:0.99, green:0.93, blue:0.96, alpha:1.0)
-
+        
     }
     
     func setupBusinessTableView() {
