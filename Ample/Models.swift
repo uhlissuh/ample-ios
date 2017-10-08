@@ -53,3 +53,14 @@ struct Business {
     var imageUrl: String?
     var location: Location?
 }
+
+struct ExistingBusiness {
+    var name: String
+    var id: Int
+    var yelpId: String
+    var categories: [Category]
+    var coordinates: (latitude: Double, longitude: Double)
+    var imageUrl: String?
+    var location: Location?
+    var phone: String
+}

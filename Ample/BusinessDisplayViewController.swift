@@ -51,7 +51,6 @@ class BusinessDisplayViewController: UIViewController, UITableViewDelegate, UITa
     override func viewWillAppear(_ animated: Bool) {
         getReviewsForBusiness { (reviews) in
             self.reviewsList = reviews
-            print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$", reviews)
             self.reviewTable.reloadData()
         }
     }

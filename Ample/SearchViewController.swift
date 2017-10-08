@@ -368,10 +368,7 @@ class SearchViewController: UIViewController, MKLocalSearchCompleterDelegate, CL
         }
     }
     
-    func callToServerForExistingBusinesses(){
         
-    }
-    
     func getRecentReviews(completionHandler: @escaping ([Review]) -> Void){
         let url = URL(string: "http://localhost:8000/recentreviews")
         let task = URLSession.shared.dataTask(with: url!) { (data, response, error) -> Void in
