@@ -30,17 +30,14 @@ class BusinessDisplayViewController: UIViewController, UITableViewDelegate, UITa
         reviewTable.dataSource = self
         
         titleLabel.text = business?.name
-        addressLabel.text = business?.location?.address1
-        cityLabel.text = (business?.location?.city)! + ", " + (business?.location?.state)!
+        addressLabel.text = business?.address1
+        cityLabel.text = (business?.city)! + ", " + (business?.state)!
         phoneLabel.text = business?.phone
         addReviewButton.layer.cornerRadius = 5
         
         getAndSetBusinessImage()
         
-        var categoriestitleArray: [String] = []
-        for category in (business?.categories)! {
-            categoriestitleArray.append(category.title!)
-        }
+        let categoriestitleArray: [String] = (business?.categoryTitles)!
         let categoriesString = categoriestitleArray.joined(separator: ", ")
         
         categoriesLabel.text = categoriesString
@@ -66,7 +63,7 @@ class BusinessDisplayViewController: UIViewController, UITableViewDelegate, UITa
     }
 
     func getAndSetBusinessImage() {
-        if business?.imageUrl != "" {
+        if business?.imageUrl != nil {
             let url = URL(string: (business?.imageUrl)!)
             DispatchQueue.global().async {
                 let data = try? Data(contentsOf: url!)

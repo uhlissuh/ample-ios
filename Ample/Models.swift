@@ -36,31 +36,23 @@ struct Location {
 }
 
 struct Category {
-    var alias: String?
     var title: String?
+    var alias: String?
 }
 
 struct Business {
-    var rating: Int?
-    var price: String?
-    var phone: String
-    var id: String?
-    var yelpId: String
-    var isClosed: Bool?
-    var categories: [Category]
+    var id: Int?
     var name: String
     var coordinates: (latitude: Double, longitude: Double)
+    var phone: String?
+    var yelpId: String
+    var city: String
+    var state: String
+    var address1: String?
+    var address2: String?
+    var score: Int?
     var imageUrl: String?
-    var location: Location?
+    var categoryTitles: [String]
 }
 
-struct ExistingBusiness {
-    var name: String
-    var id: Int
-    var yelpId: String
-    var categories: [Category]
-    var coordinates: (latitude: Double, longitude: Double)
-    var imageUrl: String?
-    var location: Location?
-    var phone: String
-}
+

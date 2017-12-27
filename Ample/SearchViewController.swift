@@ -10,6 +10,10 @@ import UIKit
 import MapKit
 import CoreLocation
 
+ 
+struct BusinessesResponse {
+    var businesses: [Business]
+}
 
 class SearchViewController: UIViewController, MKLocalSearchCompleterDelegate, CLLocationManagerDelegate, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
 
@@ -196,7 +200,7 @@ class SearchViewController: UIViewController, MKLocalSearchCompleterDelegate, CL
             return cell
         } else if tableView == businessTableView {
             let cell = Bundle.main.loadNibNamed("BusinessTableViewCell", owner: self, options: nil)?.first as! BusinessTableViewCell
-            if (updatedBusinesses[indexPath.row].imageUrl != "") {
+            if (updatedBusinesses[indexPath.row].imageUrl != nil) {
                 let url = URL(string: updatedBusinesses[indexPath.row].imageUrl!)
                 DispatchQueue.global().async {
                     let data = try? Data(contentsOf: url!)
@@ -208,8 +212,11 @@ class SearchViewController: UIViewController, MKLocalSearchCompleterDelegate, CL
                 cell.businessImage.image = UIImage(named: "no-profile-picture-128.png")
             }
             cell.name.text = updatedBusinesses[indexPath.row].name
-            if updatedBusinesses[indexPath.row].categories.count >= 1 {
-                cell.category.text = updatedBusinesses[indexPath.row].categories[0].title
+            if (updatedBusinesses[indexPath.row].score != nil) {
+                cell.score.text = String(describing: updatedBusinesses[indexPath.row].score!)
+            }
+            if updatedBusinesses[indexPath.row].categoryTitles.count >= 1 {
+                cell.category.text = updatedBusinesses[indexPath.row].categoryTitles[0]
             } else {
                 cell.category.text = ""
 
@@ -298,7 +305,7 @@ class SearchViewController: UIViewController, MKLocalSearchCompleterDelegate, CL
     
     func calloutToYelpForBusinesses(termString: String, latitude: Double, longitude: Double, completionHandler: @escaping ([Business]) -> Void) {
         let queryItems = [NSURLQueryItem( name: "term", value: termString), NSURLQueryItem(name: "latitude", value: String(describing: latitude)), NSURLQueryItem( name: "longitude", value: String(describing: longitude))]
-        let urlComps = NSURLComponents(string: "http://localhost:8000/businesses/search")!
+        let urlComps = NSURLComponents(string: "http://localhost:8000/businesses/searchexisting")!
         urlComps.queryItems = queryItems as [URLQueryItem]?
         let url = urlComps.url!
         
@@ -310,32 +317,19 @@ class SearchViewController: UIViewController, MKLocalSearchCompleterDelegate, CL
                     let businessesJSON = responseJSON["businesses"] as! [[String: Any]]
                     let businesses = businessesJSON.map({(businessJSON: [String: Any]) -> Business in
                         let coordinatesJSON = businessJSON["coordinates"] as! [String: Any]
-                        let locationJSON = businessJSON["location"] as! [String: Any]
                         return Business(
-                            rating: businessJSON["rating"] as? Int,
-                            price: businessJSON["price"] as? String,
-                            phone: businessJSON["phone"] as! String,
-                            id: nil,
-                            yelpId: businessJSON["id"] as! String,
-                            isClosed: businessJSON["is_closed"] as? Bool,
-                            categories: (businessJSON["categories"] as! [[String: Any]]).map({(category: [String: Any]) -> Category in
-                                return Category(
-                                    alias: category["alias"] as? String,
-                                    title: category["title"] as? String
-                                )
-                            }),
+                            id: businessJSON["id"] as? Int,
                             name: businessJSON["name"] as! String,
                             coordinates: (latitude: coordinatesJSON["latitude"] as! Double, longitude: coordinatesJSON["longitude"] as! Double),
-                            imageUrl: businessJSON["image_url"] as? String,
-                            location: Location(
-                                city: locationJSON["city"] as! String,
-                                country: locationJSON["country"] as? String,
-                                address2: locationJSON["address2"] as? String,
-                                address3: locationJSON["address3"] as? String,
-                                state: locationJSON["state"] as! String,
-                                address1: locationJSON["address1"] as? String,
-                                zipCode: locationJSON["zip_code"] as? String
-                            )
+                            phone: businessJSON["phone"] as? String,
+                            yelpId: businessJSON["yelpId"] as! String,
+                            city: businessJSON["city"] as! String,
+                            state: businessJSON["state"] as! String,
+                            address1: businessJSON["address1"] as? String,
+                            address2: businessJSON["address2"] as? String,
+                            score: businessJSON["score"] as? Int,
+                            imageUrl: businessJSON["imageUrl"] as? String,
+                            categoryTitles: businessJSON["categoryTitles"] as! [String]
                         )
                     })
                     DispatchQueue.main.async {
