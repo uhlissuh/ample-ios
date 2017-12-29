@@ -200,7 +200,7 @@ class SearchViewController: UIViewController, MKLocalSearchCompleterDelegate, CL
             return cell
         } else if tableView == businessTableView {
             let cell = Bundle.main.loadNibNamed("BusinessTableViewCell", owner: self, options: nil)?.first as! BusinessTableViewCell
-            if (updatedBusinesses[indexPath.row].imageUrl != nil) {
+            if (updatedBusinesses[indexPath.row].imageUrl != nil && updatedBusinesses[indexPath.row].imageUrl != "" ) {
                 let url = URL(string: updatedBusinesses[indexPath.row].imageUrl!)
                 DispatchQueue.global().async {
                     let data = try? Data(contentsOf: url!)

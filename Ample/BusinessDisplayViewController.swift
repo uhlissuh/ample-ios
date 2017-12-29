@@ -49,6 +49,7 @@ class BusinessDisplayViewController: UIViewController, UITableViewDelegate, UITa
         getReviewsForBusiness { (reviews) in
             self.reviewsList = reviews
             self.reviewTable.reloadData()
+            print(self.reviewsList)
         }
     }
     
