@@ -284,7 +284,7 @@ class SearchViewController: UIViewController, MKLocalSearchCompleterDelegate, CL
     }
 
     func getAllCategoryTitles(completionHandler: @escaping ([String]) -> Void){
-        let url = URL(string: "http://localhost:8000/allcategorytitles")
+        let url = URL(string: "http://localhost:8000/api/allcategorytitles")
         let task = URLSession.shared.dataTask(with: url!) { (data, response, error) -> Void in
             do {
                 if let data = data {
@@ -305,7 +305,7 @@ class SearchViewController: UIViewController, MKLocalSearchCompleterDelegate, CL
     
     func calloutToYelpForBusinesses(termString: String, latitude: Double, longitude: Double, completionHandler: @escaping ([Business]) -> Void) {
         let queryItems = [NSURLQueryItem( name: "term", value: termString), NSURLQueryItem(name: "latitude", value: String(describing: latitude)), NSURLQueryItem( name: "longitude", value: String(describing: longitude))]
-        let urlComps = NSURLComponents(string: "http://localhost:8000/businesses/searchexisting")!
+        let urlComps = NSURLComponents(string: "http://localhost:8000/api/businesses/searchexisting")!
         urlComps.queryItems = queryItems as [URLQueryItem]?
         let url = urlComps.url!
         
@@ -364,7 +364,7 @@ class SearchViewController: UIViewController, MKLocalSearchCompleterDelegate, CL
     
         
     func getRecentReviews(completionHandler: @escaping ([Review]) -> Void){
-        let url = URL(string: "http://localhost:8000/recentreviews")
+        let url = URL(string: "http://localhost:8000/api/recentreviews")
         let task = URLSession.shared.dataTask(with: url!) { (data, response, error) -> Void in
             do {
                 if let data = data {

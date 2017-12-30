@@ -76,7 +76,7 @@ class BusinessDisplayViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     func getReviewsForBusiness(completionHandler: @escaping ([Review]) -> Void) {
-        let url = URL(string: "http://localhost:8000/reviews/" + (business?.yelpId)!)
+        let url = URL(string: "http://localhost:8000/api/reviews/" + (business?.yelpId)!)
         let task = URLSession.shared.dataTask(with: url!) { (data, response, error) -> Void in
             do {
                 if let data = data {

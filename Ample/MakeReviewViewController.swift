@@ -109,7 +109,7 @@ class MakeReviewViewController: UIViewController, UITextViewDelegate {
         
         print(businessAndReview)
         
-        let request = NSMutableURLRequest(url: NSURL(string: "http://localhost:8000/businesses/postreview") as! URL)
+        let request = NSMutableURLRequest(url: NSURL(string: "http://localhost:8000/api/businesses/postreview") as! URL)
         let session = URLSession.shared
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
